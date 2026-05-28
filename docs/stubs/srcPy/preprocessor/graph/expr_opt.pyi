@@ -1,3 +1,0 @@
-# from .expr import Expr as Expr, Literal as Literal, OpExpr as OpExpr  # stripped for AutoAPI
-
-def optimise(expr: Expr) -> Expr: ...

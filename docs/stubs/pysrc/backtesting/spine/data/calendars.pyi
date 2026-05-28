@@ -1,0 +1,3 @@
+from typing import Any
+
+def is_trading_day(ts: datetime) -> bool: ...

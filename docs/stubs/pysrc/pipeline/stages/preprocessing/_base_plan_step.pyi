@@ -1,0 +1,6 @@
+from typing import Any
+
+class PlanStep(PipelineStep):
+    STEP_VERSION: Any
+    def __init__(self: Any, *, backend: str | None = ..., device: int = ..., nvtx: bool = ..., **cfg: Any) -> Any: ...
+    def fit_transform(self: Any, df: Any, ctx: Any) -> Any: ...

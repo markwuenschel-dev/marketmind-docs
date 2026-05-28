@@ -1,0 +1,3 @@
+from typing import Any
+
+def solve_multi_ou_control() -> None: ...

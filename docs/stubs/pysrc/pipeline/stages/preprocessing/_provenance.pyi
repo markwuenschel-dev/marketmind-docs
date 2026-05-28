@@ -1,0 +1,3 @@
+from typing import Any
+
+def build_meta(step_name: str, step_version: str, cfg: Dict[str, Any]) -> Dict[str, Any]: ...

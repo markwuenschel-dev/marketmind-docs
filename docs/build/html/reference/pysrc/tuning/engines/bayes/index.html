@@ -1,0 +1,1504 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../../../genindex.html"><link rel="search" title="Search" href="../../../../../search.html"><link rel="next" title="pysrc.tuning.engines.grid" href="../grid/index.html"><link rel="prev" title="pysrc.tuning.engines" href="../index.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>pysrc.tuning.engines.bayes - MarketMind 7.7.0-draft Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css?v=a0a71c94" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=4a0b1e88" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../../index.html"><div class="brand">MarketMind 7.7.0-draft Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../../index.html">
+  
+  <span class="sidebar-brand-text">MarketMind 7.7.0-draft Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html">MarketMind README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#overview">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#working-pipeline">2. Working Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#system-skeleton">3. System Skeleton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#architecture-overview">4. Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#getting-started">5. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#quality-testing-and-governance">6. Quality, Testing, and Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#companion-documents">7. Companion Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../README.html#canonical-release-ledger">8. Canonical Release Ledger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#executive-summary">1. Executive Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#problem-statement">2. Problem Statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#current-platform">3. Current Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#proposed-meta-learning-architecture">4. Proposed Meta-Learning Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#validation-framework">5. Validation Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#promotion-rollback-and-kill-logic">6. Promotion, Rollback, and Kill Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#current-status-vs-future-scope">7. Current Status vs Future Scope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#operating-model">8. Operating Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#risks-and-limitations">9. Risks and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#roadmap">10. Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#conclusion">11. Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../WhitePaper.html#appendix-a-glossary">Appendix A - Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CHANGELOG.html">Release History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CHANGELOG.html#version-history">Version History</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Current Companion Suite</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ImplementationPlan.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ImplementationPlan.html#current-reality">2. Current reality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ImplementationPlan.html#active-phase-ii-funnel">3. Active Phase II funnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ImplementationPlan.html#non-goals-and-invariants">4. Non-goals and invariants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ImplementationPlan.html#exit-criteria">5. Exit criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html">1. Current roadmap summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html#active-roadmap">2. Active roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html#candidate-breadth">3. Candidate breadth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html#portfolio-expression">4. Portfolio expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html#stop-continue-rules">5. Stop / continue rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../TechnicalRoadmap.html#current-roadmap-verdict">6. Current roadmap verdict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html">0. Decision framing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#evidence-history">1. Evidence history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#core-definitions">2. Core definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#candidate-matrix">3. Candidate matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#current-acceptance-criteria">4. Current acceptance criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#current-research-priorities">5. Current research priorities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningCore.html#non-goals">6. Non-goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#current-architecture-reality">2. Current architecture reality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#runtime-target-if-earned">3. Runtime target if earned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#w3-outcomes-and-architectural-implications">4. W3 outcomes and architectural implications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#required-architecture-changes-for-the-broad-reset">5. Required architecture changes for the broad reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#conditional-follow-up">6. Conditional follow-up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MetaLearningArchitectureVision.html#explicit-non-claims">7. Explicit non-claims</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ResolutionLedger.html">1. Current status dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ResolutionLedger.html#key-decisions">2. Key decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ResolutionLedger.html#current-artifact-pointers">3. Current artifact pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ResolutionLedger.html#current-strategic-interpretation">4. Current strategic interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../trainer_entry_decision_package.html">Trainer Entry Decision Package</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Governance / Phase II Controls</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#threshold-states">2. Threshold States</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#required-fields">3. Required Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#migration-rule">4. Migration Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#usage-rules">5. Usage Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#validation-process">6. Validation Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#enforcement">7. Enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#relationships">8. Relationships</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#scope-boundary">9. Scope Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ThresholdGovernanceRegister.html#current-threshold-records">10. Current Threshold Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#core-principle">2. Core Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#point-in-time-contract">3. Point-in-Time Contract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#bocpd-governed-data-semantics">4. BOCPD Governed-Data Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#vintage-and-restatement-policy">5. Vintage and Restatement Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#dataset-lineage-requirements">6. Dataset Lineage Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#universe-governance">7. Universe Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#task-level-pit-boundary">8. Task-Level PIT Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#acceptable-approximations">9. Acceptable Approximations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#enforcement">10. Enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#scope-boundary">11. Scope Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../DataGovernanceCharter.html#amendment-rule">12. Amendment Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html#artifact-tiers">2. Artifact tiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html#row-level-decision-emission-for-attribution-eligible-lanes">3. Row-level decision emission for attribution-eligible lanes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html#classification-value-sets">4. Classification value sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html#non-negotiable-experiment-hygiene">5. Non-negotiable experiment hygiene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIArtifactContract.html#avoided-anti-patterns">6. Avoided anti-patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html">1. Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#current-active-lane">2. Current active lane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#execution-rule">3. Execution rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#lessons-carried-into-the-broad-phase-ii-reset">4. Lessons carried into the broad Phase II reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#broad-reset-order-of-operations">5. Broad reset order of operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#failure-handling">6. Failure handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#deferred-and-paused-work">7. Deferred and paused work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#interpretation-rules">8. Interpretation rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#router-language-enforcement">9. Router-language enforcement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#agent-output-expectations">10. Agent output expectations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PhaseIIResearchExecutionPlaybook.html#keep-scope-tight">11. Keep scope tight</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Protocols and Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Risk_and_Execution_Realism_Protocol.html">Risk and Execution Realism Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Signal_Governance_Protocol.html">Signal Governance Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Signal_Reliability_Schema.html">Signal Reliability Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Task_Validity_Pilot_Report_Canonical.html">Task Validity Pilot Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../FormattingSpec.html">Formatting Spec</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Governance and Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../GOVERNANCE.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../MODEL_CARD.html">Model Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../PRIVACY_POLICY.html">Privacy Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../RISK_DISCLOSURE.html">Risk Disclosure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../REPRODUCIBILITY.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../SECURITY.html">Security Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../LICENSE.html">License</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contributor and Engineering Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributors/coding_standards.html">Programming Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../../index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../../index.html">pysrc</a><input aria-label="Toggle navigation of pysrc" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../analytics/index.html">pysrc.analytics</a><input aria-label="Toggle navigation of pysrc.analytics" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../analytics/statistics/index.html">pysrc.analytics.statistics</a><input aria-label="Toggle navigation of pysrc.analytics.statistics" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../analytics/statistics/adapters/index.html">pysrc.analytics.statistics.adapters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../analytics/statistics/base/index.html">pysrc.analytics.statistics.base</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../analytics/statistics/registry/index.html">pysrc.analytics.statistics.registry</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../analytics/statistics/reporting/index.html">pysrc.analytics.statistics.reporting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../artifact_registry/index.html">pysrc.artifact_registry</a><input aria-label="Toggle navigation of pysrc.artifact_registry" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/artifact_store/index.html">pysrc.artifact_registry.artifact_store</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/artifacts/index.html">pysrc.artifact_registry.artifacts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/attestation/index.html">pysrc.artifact_registry.attestation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/bundle_writer/index.html">pysrc.artifact_registry.bundle_writer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/cas/index.html">pysrc.artifact_registry.cas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/contracts/index.html">pysrc.artifact_registry.contracts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/reproducibility/index.html">pysrc.artifact_registry.reproducibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/run_registry/index.html">pysrc.artifact_registry.run_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../artifact_registry/sanitization/index.html">pysrc.artifact_registry.sanitization</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../autotune/index.html">pysrc.autotune</a><input aria-label="Toggle navigation of pysrc.autotune" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autotune/api/index.html">pysrc.autotune.api</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../backtesting/index.html">pysrc.backtesting</a><input aria-label="Toggle navigation of pysrc.backtesting" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../backtesting/api/index.html">pysrc.backtesting.api</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../backtesting/data/index.html">pysrc.backtesting.data</a><input aria-label="Toggle navigation of pysrc.backtesting.data" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../backtesting/data/pit/index.html">pysrc.backtesting.data.pit</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../backtesting/engine/index.html">pysrc.backtesting.engine</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../bridge/index.html">pysrc.bridge</a><input aria-label="Toggle navigation of pysrc.bridge" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../bridge/dataprep_orchestrator/index.html">pysrc.bridge.dataprep_orchestrator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../bridge/java_entry/index.html">pysrc.bridge.java_entry</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../cli/index.html">pysrc.cli</a><input aria-label="Toggle navigation of pysrc.cli" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../cli/backtest/index.html">pysrc.cli.backtest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../cli/gate/index.html">pysrc.cli.gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../cli/preprocess/index.html">pysrc.cli.preprocess</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/index.html">pysrc.core</a><input aria-label="Toggle navigation of pysrc.core" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../core/errors/index.html">pysrc.core.errors</a><input aria-label="Toggle navigation of pysrc.core.errors" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/errors/base/index.html">pysrc.core.errors.base</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/errors/codes/index.html">pysrc.core.errors.codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/errors/domains/index.html">pysrc.core.errors.domains</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../core/runtime/index.html">pysrc.core.runtime</a><input aria-label="Toggle navigation of pysrc.core.runtime" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/runtime/capabilities/index.html">pysrc.core.runtime.capabilities</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/runtime/optional_imports/index.html">pysrc.core.runtime.optional_imports</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/runtime/prometheus_metrics/index.html">pysrc.core.runtime.prometheus_metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../core/validation/index.html">pysrc.core.validation</a><input aria-label="Toggle navigation of pysrc.core.validation" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/validation/compose/index.html">pysrc.core.validation.compose</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/validation/dataframe/index.html">pysrc.core.validation.dataframe</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/validation/market/index.html">pysrc.core.validation.market</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../core/validation/tensor/index.html">pysrc.core.validation.tensor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../data/index.html">pysrc.data</a><input aria-label="Toggle navigation of pysrc.data" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../data/calendars/index.html">pysrc.data.calendars</a><input aria-label="Toggle navigation of pysrc.data.calendars" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../data/calendars/holidays/index.html">pysrc.data.calendars.holidays</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../data/datasets/index.html">pysrc.data.datasets</a><input aria-label="Toggle navigation of pysrc.data.datasets" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../data/datasets/builders/index.html">pysrc.data.datasets.builders</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/dataview/index.html">pysrc.data.dataview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/dataview_asof_adapter/index.html">pysrc.data.dataview_asof_adapter</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../data/frames/index.html">pysrc.data.frames</a><input aria-label="Toggle navigation of pysrc.data.frames" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../data/frames/dataframe_helpers/index.html">pysrc.data.frames.dataframe_helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/order_book/index.html">pysrc.data.order_book</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/pit_config/index.html">pysrc.data.pit_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/satellite_data/index.html">pysrc.data.satellite_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/universe/index.html">pysrc.data.universe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/weather_data/index.html">pysrc.data.weather_data</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../domain/index.html">pysrc.domain</a><input aria-label="Toggle navigation of pysrc.domain" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../domain/interfaces/index.html">pysrc.domain.interfaces</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../domain/portfolio/index.html">pysrc.domain.portfolio</a><input aria-label="Toggle navigation of pysrc.domain.portfolio" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../domain/portfolio/service/index.html">pysrc.domain.portfolio.service</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../domain/risk/index.html">pysrc.domain.risk</a><input aria-label="Toggle navigation of pysrc.domain.risk" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../domain/risk/service/index.html">pysrc.domain.risk.service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../infra/index.html">pysrc.infra</a><input aria-label="Toggle navigation of pysrc.infra" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../infra/brokers/index.html">pysrc.infra.brokers</a><input aria-label="Toggle navigation of pysrc.infra.brokers" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../infra/brokers/ibkr/index.html">pysrc.infra.brokers.ibkr</a><input aria-label="Toggle navigation of pysrc.infra.brokers.ibkr" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../infra/brokers/ibkr/connection/index.html">pysrc.infra.brokers.ibkr.connection</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../infra/brokers/ibkr/historical/index.html">pysrc.infra.brokers.ibkr.historical</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../infra/brokers/ibkr/ib_data_collection/index.html">pysrc.infra.brokers.ibkr.ib_data_collection</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../infra/brokers/ibkr/orders/index.html">pysrc.infra.brokers.ibkr.orders</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../infra/infra_common/index.html">pysrc.infra.infra_common</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../infra/infra_config/index.html">pysrc.infra.infra_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../infra/infra_factory/index.html">pysrc.infra.infra_factory</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../meta/index.html">pysrc.meta</a><input aria-label="Toggle navigation of pysrc.meta" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta/allocator_benchmark/index.html">pysrc.meta.allocator_benchmark</a><input aria-label="Toggle navigation of pysrc.meta.allocator_benchmark" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/aggregation/index.html">pysrc.meta.allocator_benchmark.aggregation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/allocation/index.html">pysrc.meta.allocator_benchmark.allocation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/baselines/index.html">pysrc.meta.allocator_benchmark.baselines</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/classification/index.html">pysrc.meta.allocator_benchmark.classification</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/config/index.html">pysrc.meta.allocator_benchmark.config</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/data_quality/index.html">pysrc.meta.allocator_benchmark.data_quality</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/decision_rows/index.html">pysrc.meta.allocator_benchmark.decision_rows</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/errors/index.html">pysrc.meta.allocator_benchmark.errors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/features/index.html">pysrc.meta.allocator_benchmark.features</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/frozen_inputs/index.html">pysrc.meta.allocator_benchmark.frozen_inputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/metrics/index.html">pysrc.meta.allocator_benchmark.metrics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/report/index.html">pysrc.meta.allocator_benchmark.report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/runner/index.html">pysrc.meta.allocator_benchmark.runner</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/sanity_checks/index.html">pysrc.meta.allocator_benchmark.sanity_checks</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/schema/index.html">pysrc.meta.allocator_benchmark.schema</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/system_records/index.html">pysrc.meta.allocator_benchmark.system_records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w2_v3m/index.html">pysrc.meta.allocator_benchmark.w2_v3m</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_a_surface_repair/index.html">pysrc.meta.allocator_benchmark.w3_a_surface_repair</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_audit/index.html">pysrc.meta.allocator_benchmark.w3_audit</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_b_pandas_ta/index.html">pysrc.meta.allocator_benchmark.w3_b_pandas_ta</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_b_selected_decisions/index.html">pysrc.meta.allocator_benchmark.w3_b_selected_decisions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_c_liquidity_child/index.html">pysrc.meta.allocator_benchmark.w3_c_liquidity_child</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_c_surface_d_audit/index.html">pysrc.meta.allocator_benchmark.w3_c_surface_d_audit</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_d_surface_d_failure/index.html">pysrc.meta.allocator_benchmark.w3_d_surface_d_failure</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w3_replication/index.html">pysrc.meta.allocator_benchmark.w3_replication</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w4_a_router_opportunity/index.html">pysrc.meta.allocator_benchmark.w4_a_router_opportunity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/w4_b_learned_router/index.html">pysrc.meta.allocator_benchmark.w4_b_learned_router</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/xgb_challengers/index.html">pysrc.meta.allocator_benchmark.xgb_challengers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/allocator_benchmark/xgb_preprocessing/index.html">pysrc.meta.allocator_benchmark.xgb_preprocessing</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/anti_signal_autopsy/index.html">pysrc.meta.anti_signal_autopsy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/bocpd_service/index.html">pysrc.meta.bocpd_service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/curriculum/index.html">pysrc.meta.curriculum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/ewc/index.html">pysrc.meta.ewc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/ewc_config/index.html">pysrc.meta.ewc_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/ewc_errors/index.html">pysrc.meta.ewc_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/execution_assumptions_config/index.html">pysrc.meta.execution_assumptions_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/execution_assumptions_emitter/index.html">pysrc.meta.execution_assumptions_emitter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/execution_assumptions_errors/index.html">pysrc.meta.execution_assumptions_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/execution_assumptions_io/index.html">pysrc.meta.execution_assumptions_io</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta/indicators/index.html">pysrc.meta.indicators</a><input aria-label="Toggle navigation of pysrc.meta.indicators" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/config/index.html">pysrc.meta.indicators.config</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/diagnostics/index.html">pysrc.meta.indicators.diagnostics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/pandas_ta_classic_provider/index.html">pysrc.meta.indicators.pandas_ta_classic_provider</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/registry/index.html">pysrc.meta.indicators.registry</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/scaling/index.html">pysrc.meta.indicators.scaling</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/indicators/schema/index.html">pysrc.meta.indicators.schema</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/meta_validity_emitter/index.html">pysrc.meta.meta_validity_emitter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/phase2_artifact_contract/index.html">pysrc.meta.phase2_artifact_contract</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta/phase2_broad_reset/index.html">pysrc.meta.phase2_broad_reset</a><input aria-label="Toggle navigation of pysrc.meta.phase2_broad_reset" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_contracts/index.html">pysrc.meta.phase2_broad_reset.p2_contracts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_map/index.html">pysrc.meta.phase2_broad_reset.p2_map</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_matrix/index.html">pysrc.meta.phase2_broad_reset.p2_matrix</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_narrow/index.html">pysrc.meta.phase2_broad_reset.p2_narrow</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_panel_inventory/index.html">pysrc.meta.phase2_broad_reset.p2_panel_inventory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_parallel/index.html">pysrc.meta.phase2_broad_reset.p2_parallel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_runner/index.html">pysrc.meta.phase2_broad_reset.p2_runner</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/phase2_broad_reset/p2_supervision_adapter/index.html">pysrc.meta.phase2_broad_reset.p2_supervision_adapter</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/regime_config/index.html">pysrc.meta.regime_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/regime_labeler/index.html">pysrc.meta.regime_labeler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_k_sweep_config/index.html">pysrc.meta.reptile_k_sweep_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_k_sweep_errors/index.html">pysrc.meta.reptile_k_sweep_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_k_sweep_runner/index.html">pysrc.meta.reptile_k_sweep_runner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_proxy_alignment/index.html">pysrc.meta.reptile_proxy_alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_proxy_alignment_config/index.html">pysrc.meta.reptile_proxy_alignment_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_proxy_alignment_errors/index.html">pysrc.meta.reptile_proxy_alignment_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_trainer/index.html">pysrc.meta.reptile_trainer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_trainer_benchmark/index.html">pysrc.meta.reptile_trainer_benchmark</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/reptile_trainer_config/index.html">pysrc.meta.reptile_trainer_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_artifacts/index.html">pysrc.meta.rg09_artifacts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_boundary_treatment/index.html">pysrc.meta.rg09_boundary_treatment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_empirical_closure/index.html">pysrc.meta.rg09_empirical_closure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_feasibility/index.html">pysrc.meta.rg09_feasibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_fixture_contract/index.html">pysrc.meta.rg09_fixture_contract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_geometry_sensitivity/index.html">pysrc.meta.rg09_geometry_sensitivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_harness/index.html">pysrc.meta.rg09_harness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_nulls/index.html">pysrc.meta.rg09_nulls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_oi59_boundary_treatment/index.html">pysrc.meta.rg09_oi59_boundary_treatment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_oi59_episode_construction/index.html">pysrc.meta.rg09_oi59_episode_construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_oi59_feasibility_audit/index.html">pysrc.meta.rg09_oi59_feasibility_audit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_oi59_segmentation_redesign/index.html">pysrc.meta.rg09_oi59_segmentation_redesign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_oi59_task_definition/index.html">pysrc.meta.rg09_oi59_task_definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_parquet_io/index.html">pysrc.meta.rg09_parquet_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_phase2_bridge/index.html">pysrc.meta.rg09_phase2_bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_power_analysis/index.html">pysrc.meta.rg09_power_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_shuffled_label_separability_diagnostic/index.html">pysrc.meta.rg09_shuffled_label_separability_diagnostic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_structural_calibration/index.html">pysrc.meta.rg09_structural_calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_threshold_catalog/index.html">pysrc.meta.rg09_threshold_catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/rg09_transition_episodes/index.html">pysrc.meta.rg09_transition_episodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/run_w1_real_challenger_evidence/index.html">pysrc.meta.run_w1_real_challenger_evidence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/scaffold_emitter_guard/index.html">pysrc.meta.scaffold_emitter_guard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/seed_policy/index.html">pysrc.meta.seed_policy</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta/signal_usability/index.html">pysrc.meta.signal_usability</a><input aria-label="Toggle navigation of pysrc.meta.signal_usability" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/baselines/index.html">pysrc.meta.signal_usability.baselines</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/config/index.html">pysrc.meta.signal_usability.config</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/errors/index.html">pysrc.meta.signal_usability.errors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/labels/index.html">pysrc.meta.signal_usability.labels</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/metrics/index.html">pysrc.meta.signal_usability.metrics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/models/index.html">pysrc.meta.signal_usability.models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/panel/index.html">pysrc.meta.signal_usability.panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/report/index.html">pysrc.meta.signal_usability.report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/runner/index.html">pysrc.meta.signal_usability.runner</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/signals/index.html">pysrc.meta.signal_usability.signals</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta/signal_usability/split/index.html">pysrc.meta.signal_usability.split</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task/index.html">pysrc.meta.task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_generator/index.html">pysrc.meta.task_generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_manifest_config/index.html">pysrc.meta.task_manifest_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_manifest_emitter/index.html">pysrc.meta.task_manifest_emitter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_manifest_errors/index.html">pysrc.meta.task_manifest_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_manifest_io/index.html">pysrc.meta.task_manifest_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/task_registry/index.html">pysrc.meta.task_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/threshold_governance/index.html">pysrc.meta.threshold_governance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_adapter/index.html">pysrc.meta.w1_baseline_adapter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_config/index.html">pysrc.meta.w1_baseline_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_errors/index.html">pysrc.meta.w1_baseline_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_incumbent/index.html">pysrc.meta.w1_baseline_incumbent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_io/index.html">pysrc.meta.w1_baseline_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_runner/index.html">pysrc.meta.w1_baseline_runner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_baseline_types/index.html">pysrc.meta.w1_baseline_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_challenger_surface/index.html">pysrc.meta.w1_challenger_surface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_clean_rerun/index.html">pysrc.meta.w1_clean_rerun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_evidence_fingerprints/index.html">pysrc.meta.w1_evidence_fingerprints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_evidence_sanity/index.html">pysrc.meta.w1_evidence_sanity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_fold_safe_meta_allocator_adapter/index.html">pysrc.meta.w1_fold_safe_meta_allocator_adapter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_governed_csv_dataview/index.html">pysrc.meta.w1_governed_csv_dataview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_governed_learned_checkpoint_emit/index.html">pysrc.meta.w1_governed_learned_checkpoint_emit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_governed_meta_head_trainer/index.html">pysrc.meta.w1_governed_meta_head_trainer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_meta_head_features/index.html">pysrc.meta.w1_meta_head_features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_ranking_vs_expression_decomposition/index.html">pysrc.meta.w1_ranking_vs_expression_decomposition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_real_task_pool/index.html">pysrc.meta.w1_real_task_pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_reptile_challenger_bridge/index.html">pysrc.meta.w1_reptile_challenger_bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w1_reptile_trained_meta_allocator_adapter/index.html">pysrc.meta.w1_reptile_trained_meta_allocator_adapter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta/w2_s1_baseline_only/index.html">pysrc.meta.w2_s1_baseline_only</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../meta_learning/index.html">pysrc.meta_learning</a><input aria-label="Toggle navigation of pysrc.meta_learning" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/aq09_ablation_harness/index.html">pysrc.meta_learning.aq09_ablation_harness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/confidence_contract/index.html">pysrc.meta_learning.confidence_contract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/context_encoder/index.html">pysrc.meta_learning.context_encoder</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta_learning/contracts/index.html">pysrc.meta_learning.contracts</a><input aria-label="Toggle navigation of pysrc.meta_learning.contracts" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta_learning/contracts/encoder_contracts/index.html">pysrc.meta_learning.contracts.encoder_contracts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta_learning/contracts/meta_task/index.html">pysrc.meta_learning.contracts.meta_task</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta_learning/contracts/task_registry/index.html">pysrc.meta_learning.contracts.task_registry</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/dynamic_k_contract/index.html">pysrc.meta_learning.dynamic_k_contract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/encoder_coherence_diagnostics/index.html">pysrc.meta_learning.encoder_coherence_diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/in_memory_task_registry/index.html">pysrc.meta_learning.in_memory_task_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/inference_boundary/index.html">pysrc.meta_learning.inference_boundary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/phase2_ii0c_comparison/index.html">pysrc.meta_learning.phase2_ii0c_comparison</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/phase2_ii0c_encoder/index.html">pysrc.meta_learning.phase2_ii0c_encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/phase2_ii0c_reference/index.html">pysrc.meta_learning.phase2_ii0c_reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/phase2_ii0c_tasks/index.html">pysrc.meta_learning.phase2_ii0c_tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/regime_vocabulary/index.html">pysrc.meta_learning.regime_vocabulary</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../meta_learning/reports/index.html">pysrc.meta_learning.reports</a><input aria-label="Toggle navigation of pysrc.meta_learning.reports" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../meta_learning/reports/meta_validity_report/index.html">pysrc.meta_learning.reports.meta_validity_report</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../meta_learning/task_generator/index.html">pysrc.meta_learning.task_generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../ml/index.html">pysrc.ml</a><input aria-label="Toggle navigation of pysrc.ml" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../ml/datasets/index.html">pysrc.ml.datasets</a><input aria-label="Toggle navigation of pysrc.ml.datasets" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ml/datasets/timeseries/index.html">pysrc.ml.datasets.timeseries</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../ml/runtime/index.html">pysrc.ml.runtime</a><input aria-label="Toggle navigation of pysrc.ml.runtime" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ml/runtime/torch/index.html">pysrc.ml.runtime.torch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../models/index.html">pysrc.models</a><input aria-label="Toggle navigation of pysrc.models" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/LSTM_model/index.html">pysrc.models.LSTM_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/bayesian_nn/index.html">pysrc.models.bayesian_nn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/custom_models/index.html">pysrc.models.custom_models</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../models/ensemble/index.html">pysrc.models.ensemble</a><input aria-label="Toggle navigation of pysrc.models.ensemble" class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" role="switch" type="checkbox"/><label for="toctree-checkbox-37"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../models/ensemble/ensemble_model/index.html">pysrc.models.ensemble.ensemble_model</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/evaluate_model/index.html">pysrc.models.evaluate_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/gnn_model/index.html">pysrc.models.gnn_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/hybrid_model/index.html">pysrc.models.hybrid_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/informer_model/index.html">pysrc.models.informer_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/lstm_classifier/index.html">pysrc.models.lstm_classifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/regime_detector/index.html">pysrc.models.regime_detector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/tcn_model/index.html">pysrc.models.tcn_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/train_model/index.html">pysrc.models.train_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/transformer_model/index.html">pysrc.models.transformer_model</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../ops/index.html">pysrc.ops</a><input aria-label="Toggle navigation of pysrc.ops" class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" role="switch" type="checkbox"/><label for="toctree-checkbox-38"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/caching/index.html">pysrc.ops.caching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/dataprep_cache_adapter/index.html">pysrc.ops.dataprep_cache_adapter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/dataprep_io/index.html">pysrc.ops.dataprep_io</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../ops/hashing/index.html">pysrc.ops.hashing</a><input aria-label="Toggle navigation of pysrc.ops.hashing" class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" role="switch" type="checkbox"/><label for="toctree-checkbox-39"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/adr007_parity/index.html">pysrc.ops.hashing.adr007_parity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/adr007_replay/index.html">pysrc.ops.hashing.adr007_replay</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/ahm/index.html">pysrc.ops.hashing.ahm</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/canonical_frame/index.html">pysrc.ops.hashing.canonical_frame</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/canonicalizer/index.html">pysrc.ops.hashing.canonicalizer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/contract/index.html">pysrc.ops.hashing.contract</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/envelope/index.html">pysrc.ops.hashing.envelope</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/equality/index.html">pysrc.ops.hashing.equality</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ops/hashing/preimage/index.html">pysrc.ops.hashing.preimage</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../ops/hashing/primitives/index.html">pysrc.ops.hashing.primitives</a><input aria-label="Toggle navigation of pysrc.ops.hashing.primitives" class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" role="switch" type="checkbox"/><label for="toctree-checkbox-40"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/blake3_impl/index.html">pysrc.ops.hashing.primitives.blake3_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/hmac_sha256_impl/index.html">pysrc.ops.hashing.primitives.hmac_sha256_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/minhash_impl/index.html">pysrc.ops.hashing.primitives.minhash_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/rabin_impl/index.html">pysrc.ops.hashing.primitives.rabin_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/sha256_jcs/index.html">pysrc.ops.hashing.primitives.sha256_jcs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/simhash_impl/index.html">pysrc.ops.hashing.primitives.simhash_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/siphash_impl/index.html">pysrc.ops.hashing.primitives.siphash_impl</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../ops/hashing/primitives/xxh3_impl/index.html">pysrc.ops.hashing.primitives.xxh3_impl</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/hashing_contract/index.html">pysrc.ops.hashing_contract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/mm_logkit/index.html">pysrc.ops.mm_logkit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/multi_tier_cache/index.html">pysrc.ops.multi_tier_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/observability/index.html">pysrc.ops.observability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/observability_sdk/index.html">pysrc.ops.observability_sdk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ops/telemetry/index.html">pysrc.ops.telemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../pipeline/index.html">pysrc.pipeline</a><input aria-label="Toggle navigation of pysrc.pipeline" class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" role="switch" type="checkbox"/><label for="toctree-checkbox-41"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../pipeline/contracts/index.html">pysrc.pipeline.contracts</a><input aria-label="Toggle navigation of pysrc.pipeline.contracts" class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" role="switch" type="checkbox"/><label for="toctree-checkbox-42"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/contracts/governance/index.html">pysrc.pipeline.contracts.governance</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../pipeline/core/index.html">pysrc.pipeline.core</a><input aria-label="Toggle navigation of pysrc.pipeline.core" class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" role="switch" type="checkbox"/><label for="toctree-checkbox-43"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_base/index.html">pysrc.pipeline.core.pipeline_core_base</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_builder/index.html">pysrc.pipeline.core.pipeline_core_builder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_context/index.html">pysrc.pipeline.core.pipeline_core_context</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_metrics/index.html">pysrc.pipeline.core.pipeline_core_metrics</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_plugins/index.html">pysrc.pipeline.core.pipeline_core_plugins</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/core/pipeline_core_registry/index.html">pysrc.pipeline.core.pipeline_core_registry</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../pipeline/dataprep_runtime/index.html">pysrc.pipeline.dataprep_runtime</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../pipeline/execution/index.html">pysrc.pipeline.execution</a><input aria-label="Toggle navigation of pysrc.pipeline.execution" class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" role="switch" type="checkbox"/><label for="toctree-checkbox-44"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/execution/batch/index.html">pysrc.pipeline.execution.batch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/execution/streaming/index.html">pysrc.pipeline.execution.streaming</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../pipeline/ii0c_governed_artifacts/index.html">pysrc.pipeline.ii0c_governed_artifacts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../pipeline/orchestrator/index.html">pysrc.pipeline.orchestrator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../pipeline/phase2_governed/index.html">pysrc.pipeline.phase2_governed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../pipeline/phase2_ii0c_runner/index.html">pysrc.pipeline.phase2_ii0c_runner</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../pipeline/pipeline_config/index.html">pysrc.pipeline.pipeline_config</a><input aria-label="Toggle navigation of pysrc.pipeline.pipeline_config" class="toctree-checkbox" id="toctree-checkbox-45" name="toctree-checkbox-45" role="switch" type="checkbox"/><label for="toctree-checkbox-45"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/pipeline_config/env/index.html">pysrc.pipeline.pipeline_config.env</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/pipeline_config/loader/index.html">pysrc.pipeline.pipeline_config.loader</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/pipeline_config/merge/index.html">pysrc.pipeline.pipeline_config.merge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/pipeline_config/models/index.html">pysrc.pipeline.pipeline_config.models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../pipeline/pipeline_config/telemetry/index.html">pysrc.pipeline.pipeline_config.telemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../pipeline/stages/index.html">pysrc.pipeline.stages</a><input aria-label="Toggle navigation of pysrc.pipeline.stages" class="toctree-checkbox" id="toctree-checkbox-46" name="toctree-checkbox-46" role="switch" type="checkbox"/><label for="toctree-checkbox-46"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../pipeline/stages/backtesting/index.html">pysrc.pipeline.stages.backtesting</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.backtesting" class="toctree-checkbox" id="toctree-checkbox-47" name="toctree-checkbox-47" role="switch" type="checkbox"/><label for="toctree-checkbox-47"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/backtesting/splits/index.html">pysrc.pipeline.stages.backtesting.splits</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/index.html">pysrc.pipeline.stages.cleaning</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning" class="toctree-checkbox" id="toctree-checkbox-48" name="toctree-checkbox-48" role="switch" type="checkbox"/><label for="toctree-checkbox-48"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/anomalies/index.html">pysrc.pipeline.stages.cleaning.anomalies</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.anomalies" class="toctree-checkbox" id="toctree-checkbox-49" name="toctree-checkbox-49" role="switch" type="checkbox"/><label for="toctree-checkbox-49"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/anomalies/batch/index.html">pysrc.pipeline.stages.cleaning.anomalies.batch</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/anomalies/streaming/index.html">pysrc.pipeline.stages.cleaning.anomalies.streaming</a></li>
+</ul>
+</li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/index.html">pysrc.pipeline.stages.cleaning.core</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.core" class="toctree-checkbox" id="toctree-checkbox-50" name="toctree-checkbox-50" role="switch" type="checkbox"/><label for="toctree-checkbox-50"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/base/index.html">pysrc.pipeline.stages.cleaning.core.base</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/config_models/index.html">pysrc.pipeline.stages.cleaning.core.config_models</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/contracts/index.html">pysrc.pipeline.stages.cleaning.core.contracts</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/factory/index.html">pysrc.pipeline.stages.cleaning.core.factory</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/metrics/index.html">pysrc.pipeline.stages.cleaning.core.metrics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/providers/index.html">pysrc.pipeline.stages.cleaning.core.providers</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/core/registry/index.html">pysrc.pipeline.stages.cleaning.core.registry</a></li>
+</ul>
+</li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/execution/index.html">pysrc.pipeline.stages.cleaning.execution</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.execution" class="toctree-checkbox" id="toctree-checkbox-51" name="toctree-checkbox-51" role="switch" type="checkbox"/><label for="toctree-checkbox-51"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/execution/batch/index.html">pysrc.pipeline.stages.cleaning.execution.batch</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/execution/runtime/index.html">pysrc.pipeline.stages.cleaning.execution.runtime</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/execution/streaming/index.html">pysrc.pipeline.stages.cleaning.execution.streaming</a></li>
+</ul>
+</li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/index.html">pysrc.pipeline.stages.cleaning.features</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.features" class="toctree-checkbox" id="toctree-checkbox-52" name="toctree-checkbox-52" role="switch" type="checkbox"/><label for="toctree-checkbox-52"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/altdata/index.html">pysrc.pipeline.stages.cleaning.features.altdata</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/calendar/index.html">pysrc.pipeline.stages.cleaning.features.calendar</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/macro/index.html">pysrc.pipeline.stages.cleaning.features.macro</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/sentiment/index.html">pysrc.pipeline.stages.cleaning.features.sentiment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/features/technical/index.html">pysrc.pipeline.stages.cleaning.features.technical</a></li>
+</ul>
+</li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/imputers/index.html">pysrc.pipeline.stages.cleaning.imputers</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.imputers" class="toctree-checkbox" id="toctree-checkbox-53" name="toctree-checkbox-53" role="switch" type="checkbox"/><label for="toctree-checkbox-53"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/imputers/denoise/index.html">pysrc.pipeline.stages.cleaning.imputers.denoise</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/imputers/missing/index.html">pysrc.pipeline.stages.cleaning.imputers.missing</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/imputers/outliers/index.html">pysrc.pipeline.stages.cleaning.imputers.outliers</a></li>
+</ul>
+</li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/index.html">pysrc.pipeline.stages.cleaning.validators</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.cleaning.validators" class="toctree-checkbox" id="toctree-checkbox-54" name="toctree-checkbox-54" role="switch" type="checkbox"/><label for="toctree-checkbox-54"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/anonymization/index.html">pysrc.pipeline.stages.cleaning.validators.anonymization</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/compliance_checks/index.html">pysrc.pipeline.stages.cleaning.validators.compliance_checks</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/contracts/index.html">pysrc.pipeline.stages.cleaning.validators.contracts</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/drift/index.html">pysrc.pipeline.stages.cleaning.validators.drift</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/io/index.html">pysrc.pipeline.stages.cleaning.validators.io</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/schema/index.html">pysrc.pipeline.stages.cleaning.validators.schema</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/cleaning/validators/stream/index.html">pysrc.pipeline.stages.cleaning.validators.stream</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../pipeline/stages/market_data/index.html">pysrc.pipeline.stages.market_data</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.market_data" class="toctree-checkbox" id="toctree-checkbox-55" name="toctree-checkbox-55" role="switch" type="checkbox"/><label for="toctree-checkbox-55"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/market_data/compliance/index.html">pysrc.pipeline.stages.market_data.compliance</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/market_data/corporate_actions/index.html">pysrc.pipeline.stages.market_data.corporate_actions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/market_data/exceptions/index.html">pysrc.pipeline.stages.market_data.exceptions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/market_data/joins/index.html">pysrc.pipeline.stages.market_data.joins</a></li>
+<li class="toctree-l6 has-children"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/index.html">pysrc.pipeline.stages.market_data.sources</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.market_data.sources" class="toctree-checkbox" id="toctree-checkbox-56" name="toctree-checkbox-56" role="switch" type="checkbox"/><label for="toctree-checkbox-56"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/alpha_vantage/index.html">pysrc.pipeline.stages.market_data.sources.alpha_vantage</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/alternative/index.html">pysrc.pipeline.stages.market_data.sources.alternative</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/alternative_data/index.html">pysrc.pipeline.stages.market_data.sources.alternative_data</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/base/index.html">pysrc.pipeline.stages.market_data.sources.base</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/coingecko/index.html">pysrc.pipeline.stages.market_data.sources.coingecko</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/contracts/index.html">pysrc.pipeline.stages.market_data.sources.contracts</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/data_loader/index.html">pysrc.pipeline.stages.market_data.sources.data_loader</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/file/index.html">pysrc.pipeline.stages.market_data.sources.file</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/fred/index.html">pysrc.pipeline.stages.market_data.sources.fred</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/fundamental_data/index.html">pysrc.pipeline.stages.market_data.sources.fundamental_data</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/ibkr/index.html">pysrc.pipeline.stages.market_data.sources.ibkr</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/influxdb/index.html">pysrc.pipeline.stages.market_data.sources.influxdb</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/market_data/index.html">pysrc.pipeline.stages.market_data.sources.market_data</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/massive_adjusted_day_panel_builder/index.html">pysrc.pipeline.stages.market_data.sources.massive_adjusted_day_panel_builder</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/massive_corporate_actions_loader/index.html">pysrc.pipeline.stages.market_data.sources.massive_corporate_actions_loader</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/massive_day_aggs_loader/index.html">pysrc.pipeline.stages.market_data.sources.massive_day_aggs_loader</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/quandl/index.html">pysrc.pipeline.stages.market_data.sources.quandl</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/runtime/index.html">pysrc.pipeline.stages.market_data.sources.runtime</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../../../pipeline/stages/market_data/sources/yahoo_fetcher/index.html">pysrc.pipeline.stages.market_data.sources.yahoo_fetcher</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/market_data/transforms/index.html">pysrc.pipeline.stages.market_data.transforms</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../pipeline/stages/preprocessing/index.html">pysrc.pipeline.stages.preprocessing</a><input aria-label="Toggle navigation of pysrc.pipeline.stages.preprocessing" class="toctree-checkbox" id="toctree-checkbox-57" name="toctree-checkbox-57" role="switch" type="checkbox"/><label for="toctree-checkbox-57"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/aliases/index.html">pysrc.pipeline.stages.preprocessing.aliases</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/explainability_step/index.html">pysrc.pipeline.stages.preprocessing.explainability_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/scaling_step/index.html">pysrc.pipeline.stages.preprocessing.scaling_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/sentiment_step/index.html">pysrc.pipeline.stages.preprocessing.sentiment_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/sequence_step/index.html">pysrc.pipeline.stages.preprocessing.sequence_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/technical_step/index.html">pysrc.pipeline.stages.preprocessing.technical_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/temporal_step/index.html">pysrc.pipeline.stages.preprocessing.temporal_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/text_embedding_step/index.html">pysrc.pipeline.stages.preprocessing.text_embedding_step</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../pipeline/stages/preprocessing/topic_modeling_step/index.html">pysrc.pipeline.stages.preprocessing.topic_modeling_step</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../preprocessor/index.html">pysrc.preprocessor</a><input aria-label="Toggle navigation of pysrc.preprocessor" class="toctree-checkbox" id="toctree-checkbox-58" name="toctree-checkbox-58" role="switch" type="checkbox"/><label for="toctree-checkbox-58"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocessor/api/index.html">pysrc.preprocessor.api</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../preprocessor/contracts/index.html">pysrc.preprocessor.contracts</a><input aria-label="Toggle navigation of pysrc.preprocessor.contracts" class="toctree-checkbox" id="toctree-checkbox-59" name="toctree-checkbox-59" role="switch" type="checkbox"/><label for="toctree-checkbox-59"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/contracts/executor/index.html">pysrc.preprocessor.contracts.executor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/contracts/plan/index.html">pysrc.preprocessor.contracts.plan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/contracts/state/index.html">pysrc.preprocessor.contracts.state</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocessor/core/index.html">pysrc.preprocessor.core</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../preprocessor/domain/index.html">pysrc.preprocessor.domain</a><input aria-label="Toggle navigation of pysrc.preprocessor.domain" class="toctree-checkbox" id="toctree-checkbox-60" name="toctree-checkbox-60" role="switch" type="checkbox"/><label for="toctree-checkbox-60"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/domain/market_calendar/index.html">pysrc.preprocessor.domain.market_calendar</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../preprocessor/graph/index.html">pysrc.preprocessor.graph</a><input aria-label="Toggle navigation of pysrc.preprocessor.graph" class="toctree-checkbox" id="toctree-checkbox-61" name="toctree-checkbox-61" role="switch" type="checkbox"/><label for="toctree-checkbox-61"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../preprocessor/graph/backends/index.html">pysrc.preprocessor.graph.backends</a><input aria-label="Toggle navigation of pysrc.preprocessor.graph.backends" class="toctree-checkbox" id="toctree-checkbox-62" name="toctree-checkbox-62" role="switch" type="checkbox"/><label for="toctree-checkbox-62"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../preprocessor/graph/backends/cudf/index.html">pysrc.preprocessor.graph.backends.cudf</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../preprocessor/graph/backends/polars/index.html">pysrc.preprocessor.graph.backends.polars</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../preprocessor/graph/backends/registry/index.html">pysrc.preprocessor.graph.backends.registry</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/dsl/index.html">pysrc.preprocessor.graph.dsl</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/executor/index.html">pysrc.preprocessor.graph.executor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/expr/index.html">pysrc.preprocessor.graph.expr</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/factory/index.html">pysrc.preprocessor.graph.factory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/graph/index.html">pysrc.preprocessor.graph.graph</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/ops/index.html">pysrc.preprocessor.graph.ops</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/ops_custom/index.html">pysrc.preprocessor.graph.ops_custom</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/graph/planner/index.html">pysrc.preprocessor.graph.planner</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocessor/splits/index.html">pysrc.preprocessor.splits</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../preprocessor/utils/index.html">pysrc.preprocessor.utils</a><input aria-label="Toggle navigation of pysrc.preprocessor.utils" class="toctree-checkbox" id="toctree-checkbox-63" name="toctree-checkbox-63" role="switch" type="checkbox"/><label for="toctree-checkbox-63"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/columns/index.html">pysrc.preprocessor.utils.columns</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/cuda_runtime/index.html">pysrc.preprocessor.utils.cuda_runtime</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/errors/index.html">pysrc.preprocessor.utils.errors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/expr_builders/index.html">pysrc.preprocessor.utils.expr_builders</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/io_gpu/index.html">pysrc.preprocessor.utils.io_gpu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/market_time/index.html">pysrc.preprocessor.utils.market_time</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/nvtx/index.html">pysrc.preprocessor.utils.nvtx</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/plan_costs/index.html">pysrc.preprocessor.utils.plan_costs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/specs/index.html">pysrc.preprocessor.utils.specs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/torch_bridge/index.html">pysrc.preprocessor.utils.torch_bridge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/transforms/index.html">pysrc.preprocessor.utils.transforms</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../preprocessor/utils/validate/index.html">pysrc.preprocessor.utils.validate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../registry/index.html">pysrc.registry</a><input aria-label="Toggle navigation of pysrc.registry" class="toctree-checkbox" id="toctree-checkbox-64" name="toctree-checkbox-64" role="switch" type="checkbox"/><label for="toctree-checkbox-64"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../registry/gate_to_screening/index.html">pysrc.registry.gate_to_screening</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../registry/screening_report/index.html">pysrc.registry.screening_report</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../registry/screening_taxonomy/index.html">pysrc.registry.screening_taxonomy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../registry/signal_abc/index.html">pysrc.registry.signal_abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../registry/signal_catalog/index.html">pysrc.registry.signal_catalog</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../scripts/index.html">pysrc.scripts</a><input aria-label="Toggle navigation of pysrc.scripts" class="toctree-checkbox" id="toctree-checkbox-65" name="toctree-checkbox-65" role="switch" type="checkbox"/><label for="toctree-checkbox-65"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/cleanup_local_sprawl/index.html">pysrc.scripts.cleanup_local_sprawl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/download_rg09_market_data/index.html">pysrc.scripts.download_rg09_market_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/fetch_es_daily_to_parquet/index.html">pysrc.scripts.fetch_es_daily_to_parquet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/generate_rg09_fixture/index.html">pysrc.scripts.generate_rg09_fixture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/patch_release_manifest_companions/index.html">pysrc.scripts.patch_release_manifest_companions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/regenerate_w3_b_selected_decisions/index.html">pysrc.scripts.regenerate_w3_b_selected_decisions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/regenerate_w3_c_closeout_report/index.html">pysrc.scripts.regenerate_w3_c_closeout_report</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/reproduce_rg09_reference/index.html">pysrc.scripts.reproduce_rg09_reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/rg09_severity_diagnostic/index.html">pysrc.scripts.rg09_severity_diagnostic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_oi59_boundary_treatment/index.html">pysrc.scripts.run_oi59_boundary_treatment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_oi59_episode_construction/index.html">pysrc.scripts.run_oi59_episode_construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_oi59_feasibility_audit/index.html">pysrc.scripts.run_oi59_feasibility_audit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_oi59_segmentation_redesign/index.html">pysrc.scripts.run_oi59_segmentation_redesign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_oi59_task_definition/index.html">pysrc.scripts.run_oi59_task_definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_p2_broad_reset/index.html">pysrc.scripts.run_p2_broad_reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_p2_map/index.html">pysrc.scripts.run_p2_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_p2_matrix/index.html">pysrc.scripts.run_p2_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_p2_narrow/index.html">pysrc.scripts.run_p2_narrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_basket/index.html">pysrc.scripts.run_rg09_basket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_boundary_recovery_lane/index.html">pysrc.scripts.run_rg09_boundary_recovery_lane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_empirical_closure/index.html">pysrc.scripts.run_rg09_empirical_closure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_feasibility/index.html">pysrc.scripts.run_rg09_feasibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_gate/index.html">pysrc.scripts.run_rg09_gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_geometry_sensitivity/index.html">pysrc.scripts.run_rg09_geometry_sensitivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_power_analysis/index.html">pysrc.scripts.run_rg09_power_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_shuffled_label_separability_diagnostic/index.html">pysrc.scripts.run_rg09_shuffled_label_separability_diagnostic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_rg09_structural_threshold_calibration/index.html">pysrc.scripts.run_rg09_structural_threshold_calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w2_v3m/index.html">pysrc.scripts.run_w2_v3m</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_a_harness_audit/index.html">pysrc.scripts.run_w3_a_harness_audit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_a_surface_repair/index.html">pysrc.scripts.run_w3_a_surface_repair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_b_pandas_ta/index.html">pysrc.scripts.run_w3_b_pandas_ta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_c_liquidity_child/index.html">pysrc.scripts.run_w3_c_liquidity_child</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_c_surface_d_audit/index.html">pysrc.scripts.run_w3_c_surface_d_audit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w3_d_surface_d_failure/index.html">pysrc.scripts.run_w3_d_surface_d_failure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w4_a_router_opportunity_audit/index.html">pysrc.scripts.run_w4_a_router_opportunity_audit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/run_w4_b_learned_router/index.html">pysrc.scripts.run_w4_b_learned_router</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/validate_w3_b_selected_decisions/index.html">pysrc.scripts.validate_w3_b_selected_decisions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scripts/w3_a_surface_repair/index.html">pysrc.scripts.w3_a_surface_repair</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../strategies/index.html">pysrc.strategies</a><input aria-label="Toggle navigation of pysrc.strategies" class="toctree-checkbox" id="toctree-checkbox-66" name="toctree-checkbox-66" role="switch" type="checkbox"/><label for="toctree-checkbox-66"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../strategies/adaptive_strategy_engine/index.html">pysrc.strategies.adaptive_strategy_engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../strategies/migrated_strategies/index.html">pysrc.strategies.migrated_strategies</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../strategies/momentum/index.html">pysrc.strategies.momentum</a><input aria-label="Toggle navigation of pysrc.strategies.momentum" class="toctree-checkbox" id="toctree-checkbox-67" name="toctree-checkbox-67" role="switch" type="checkbox"/><label for="toctree-checkbox-67"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/alpha_ir/index.html">pysrc.strategies.momentum.alpha_ir</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/comparison/index.html">pysrc.strategies.momentum.comparison</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/control/index.html">pysrc.strategies.momentum.control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/entry/index.html">pysrc.strategies.momentum.entry</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/exceptions/index.html">pysrc.strategies.momentum.exceptions</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../strategies/momentum/plans/index.html">pysrc.strategies.momentum.plans</a><input aria-label="Toggle navigation of pysrc.strategies.momentum.plans" class="toctree-checkbox" id="toctree-checkbox-68" name="toctree-checkbox-68" role="switch" type="checkbox"/><label for="toctree-checkbox-68"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/dual/index.html">pysrc.strategies.momentum.plans.dual</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/ensemble/index.html">pysrc.strategies.momentum.plans.ensemble</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/industry/index.html">pysrc.strategies.momentum.plans.industry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/ml/index.html">pysrc.strategies.momentum.plans.ml</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/residual/index.html">pysrc.strategies.momentum.plans.residual</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/tsmom/index.html">pysrc.strategies.momentum.plans.tsmom</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/plans/xsec/index.html">pysrc.strategies.momentum.plans.xsec</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/spec/index.html">pysrc.strategies.momentum.spec</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/momentum/strategy/index.html">pysrc.strategies.momentum.strategy</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../strategies/momentum/validation/index.html">pysrc.strategies.momentum.validation</a><input aria-label="Toggle navigation of pysrc.strategies.momentum.validation" class="toctree-checkbox" id="toctree-checkbox-69" name="toctree-checkbox-69" role="switch" type="checkbox"/><label for="toctree-checkbox-69"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/momentum/validation/production_v1/index.html">pysrc.strategies.momentum.validation.production_v1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../strategies/pipeline_strategy/index.html">pysrc.strategies.pipeline_strategy</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../strategies/stat_arb/index.html">pysrc.strategies.stat_arb</a><input aria-label="Toggle navigation of pysrc.strategies.stat_arb" class="toctree-checkbox" id="toctree-checkbox-70" name="toctree-checkbox-70" role="switch" type="checkbox"/><label for="toctree-checkbox-70"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../strategies/stat_arb/common/index.html">pysrc.strategies.stat_arb.common</a><input aria-label="Toggle navigation of pysrc.strategies.stat_arb.common" class="toctree-checkbox" id="toctree-checkbox-71" name="toctree-checkbox-71" role="switch" type="checkbox"/><label for="toctree-checkbox-71"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/common/diagnostics/index.html">pysrc.strategies.stat_arb.common.diagnostics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/common/feature_contract/index.html">pysrc.strategies.stat_arb.common.feature_contract</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/common/types/index.html">pysrc.strategies.stat_arb.common.types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/config/index.html">pysrc.strategies.stat_arb.config</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../strategies/stat_arb/control/index.html">pysrc.strategies.stat_arb.control</a><input aria-label="Toggle navigation of pysrc.strategies.stat_arb.control" class="toctree-checkbox" id="toctree-checkbox-72" name="toctree-checkbox-72" role="switch" type="checkbox"/><label for="toctree-checkbox-72"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/control/controller/index.html">pysrc.strategies.stat_arb.control.controller</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/control/multi_ou/index.html">pysrc.strategies.stat_arb.control.multi_ou</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/control/riccati/index.html">pysrc.strategies.stat_arb.control.riccati</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/control/stability/index.html">pysrc.strategies.stat_arb.control.stability</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/control/xi_solver/index.html">pysrc.strategies.stat_arb.control.xi_solver</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/index.html">pysrc.strategies.stat_arb.dimensions</a><input aria-label="Toggle navigation of pysrc.strategies.stat_arb.dimensions" class="toctree-checkbox" id="toctree-checkbox-73" name="toctree-checkbox-73" role="switch" type="checkbox"/><label for="toctree-checkbox-73"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/base/index.html">pysrc.strategies.stat_arb.dimensions.base</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/heptuplets/index.html">pysrc.strategies.stat_arb.dimensions.heptuplets</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/pairs/index.html">pysrc.strategies.stat_arb.dimensions.pairs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/quadruplets/index.html">pysrc.strategies.stat_arb.dimensions.quadruplets</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/quintuplets/index.html">pysrc.strategies.stat_arb.dimensions.quintuplets</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/sextuplets/index.html">pysrc.strategies.stat_arb.dimensions.sextuplets</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../strategies/stat_arb/dimensions/triplets/index.html">pysrc.strategies.stat_arb.dimensions.triplets</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/entry/index.html">pysrc.strategies.stat_arb.entry</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/formation/index.html">pysrc.strategies.stat_arb.formation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/pairs/index.html">pysrc.strategies.stat_arb.pairs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/risk_gates/index.html">pysrc.strategies.stat_arb.risk_gates</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/signal_ops/index.html">pysrc.strategies.stat_arb.signal_ops</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../strategies/stat_arb/validators/index.html">pysrc.strategies.stat_arb.validators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../../index.html">pysrc.tuning</a><input aria-label="Toggle navigation of pysrc.tuning" checked="" class="toctree-checkbox" id="toctree-checkbox-74" name="toctree-checkbox-74" role="switch" type="checkbox"/><label for="toctree-checkbox-74"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../adapters/index.html">pysrc.tuning.adapters</a><input aria-label="Toggle navigation of pysrc.tuning.adapters" class="toctree-checkbox" id="toctree-checkbox-75" name="toctree-checkbox-75" role="switch" type="checkbox"/><label for="toctree-checkbox-75"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/legacy_yaml/index.html">pysrc.tuning.adapters.legacy_yaml</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/objective/index.html">pysrc.tuning.adapters.objective</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/preprocessing_evidence_adapter/index.html">pysrc.tuning.adapters.preprocessing_evidence_adapter</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/preprocessing_executor_adapter/index.html">pysrc.tuning.adapters.preprocessing_executor_adapter</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/preprocessing_plan_adapter/index.html">pysrc.tuning.adapters.preprocessing_plan_adapter</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/preprocessing_state_adapter/index.html">pysrc.tuning.adapters.preprocessing_state_adapter</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../adapters/sklearn/index.html">pysrc.tuning.adapters.sklearn</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/index.html">pysrc.tuning.api</a><input aria-label="Toggle navigation of pysrc.tuning.api" class="toctree-checkbox" id="toctree-checkbox-76" name="toctree-checkbox-76" role="switch" type="checkbox"/><label for="toctree-checkbox-76"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/errors/index.html">pysrc.tuning.api.errors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/handlers/index.html">pysrc.tuning.api.handlers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/schemas/index.html">pysrc.tuning.api.schemas</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/server/index.html">pysrc.tuning.api.server</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../benchmarks/index.html">pysrc.tuning.benchmarks</a><input aria-label="Toggle navigation of pysrc.tuning.benchmarks" class="toctree-checkbox" id="toctree-checkbox-77" name="toctree-checkbox-77" role="switch" type="checkbox"/><label for="toctree-checkbox-77"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../benchmarks/bench_masking/index.html">pysrc.tuning.benchmarks.bench_masking</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../benchmarks/bench_online_features/index.html">pysrc.tuning.benchmarks.bench_online_features</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../benchmarks/bench_search/index.html">pysrc.tuning.benchmarks.bench_search</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../benchmarks/bench_validation/index.html">pysrc.tuning.benchmarks.bench_validation</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../config/index.html">pysrc.tuning.config</a><input aria-label="Toggle navigation of pysrc.tuning.config" class="toctree-checkbox" id="toctree-checkbox-78" name="toctree-checkbox-78" role="switch" type="checkbox"/><label for="toctree-checkbox-78"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../config/schemas/index.html">pysrc.tuning.config.schemas</a><input aria-label="Toggle navigation of pysrc.tuning.config.schemas" class="toctree-checkbox" id="toctree-checkbox-79" name="toctree-checkbox-79" role="switch" type="checkbox"/><label for="toctree-checkbox-79"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/live_trigger/index.html">pysrc.tuning.config.schemas.live_trigger</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/objective/index.html">pysrc.tuning.config.schemas.objective</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/promotion/index.html">pysrc.tuning.config.schemas.promotion</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/search_space/index.html">pysrc.tuning.config.schemas.search_space</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/tuning_job/index.html">pysrc.tuning.config.schemas.tuning_job</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../config/schemas/validation/index.html">pysrc.tuning.config.schemas.validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../core/index.html">pysrc.tuning.core</a><input aria-label="Toggle navigation of pysrc.tuning.core" class="toctree-checkbox" id="toctree-checkbox-80" name="toctree-checkbox-80" role="switch" type="checkbox"/><label for="toctree-checkbox-80"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/contracts/index.html">pysrc.tuning.core.contracts</a><input aria-label="Toggle navigation of pysrc.tuning.core.contracts" class="toctree-checkbox" id="toctree-checkbox-81" name="toctree-checkbox-81" role="switch" type="checkbox"/><label for="toctree-checkbox-81"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/artifact/index.html">pysrc.tuning.core.contracts.artifact</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/gate/index.html">pysrc.tuning.core.contracts.gate</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/objective/index.html">pysrc.tuning.core.contracts.objective</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/planner/index.html">pysrc.tuning.core.contracts.planner</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/search/index.html">pysrc.tuning.core.contracts.search</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/task/index.html">pysrc.tuning.core.contracts.task</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/contracts/validator/index.html">pysrc.tuning.core.contracts.validator</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/errors/index.html">pysrc.tuning.core.errors</a><input aria-label="Toggle navigation of pysrc.tuning.core.errors" class="toctree-checkbox" id="toctree-checkbox-82" name="toctree-checkbox-82" role="switch" type="checkbox"/><label for="toctree-checkbox-82"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/errors/determinism_errors/index.html">pysrc.tuning.core.errors.determinism_errors</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/errors/gate_errors/index.html">pysrc.tuning.core.errors.gate_errors</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/errors/pit_errors/index.html">pysrc.tuning.core.errors.pit_errors</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/errors/planning_errors/index.html">pysrc.tuning.core.errors.planning_errors</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/errors/schema_errors/index.html">pysrc.tuning.core.errors.schema_errors</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/factories/index.html">pysrc.tuning.core.factories</a><input aria-label="Toggle navigation of pysrc.tuning.core.factories" class="toctree-checkbox" id="toctree-checkbox-83" name="toctree-checkbox-83" role="switch" type="checkbox"/><label for="toctree-checkbox-83"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/artifact_factory/index.html">pysrc.tuning.core.factories.artifact_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/candidate_factory/index.html">pysrc.tuning.core.factories.candidate_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/ir_factory/index.html">pysrc.tuning.core.factories.ir_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/partition_factory/index.html">pysrc.tuning.core.factories.partition_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/plan_factory/index.html">pysrc.tuning.core.factories.plan_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/search_space_factory/index.html">pysrc.tuning.core.factories.search_space_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/spec_factory/index.html">pysrc.tuning.core.factories.spec_factory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/factories/task_factory/index.html">pysrc.tuning.core.factories.task_factory</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/gates/index.html">pysrc.tuning.core.gates</a><input aria-label="Toggle navigation of pysrc.tuning.core.gates" class="toctree-checkbox" id="toctree-checkbox-84" name="toctree-checkbox-84" role="switch" type="checkbox"/><label for="toctree-checkbox-84"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/determinism_gate/index.html">pysrc.tuning.core.gates.determinism_gate</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/execution_integrity/index.html">pysrc.tuning.core.gates.execution_integrity</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/meta_validity/index.html">pysrc.tuning.core.gates.meta_validity</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/pit_gate/index.html">pysrc.tuning.core.gates.pit_gate</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/promotion_gate/index.html">pysrc.tuning.core.gates.promotion_gate</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/rollback_gate/index.html">pysrc.tuning.core.gates.rollback_gate</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/gates/stat_validity/index.html">pysrc.tuning.core.gates.stat_validity</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/ids/index.html">pysrc.tuning.core.ids</a><input aria-label="Toggle navigation of pysrc.tuning.core.ids" class="toctree-checkbox" id="toctree-checkbox-85" name="toctree-checkbox-85" role="switch" type="checkbox"/><label for="toctree-checkbox-85"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ids/candidate_id/index.html">pysrc.tuning.core.ids.candidate_id</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ids/ir_hash/index.html">pysrc.tuning.core.ids.ir_hash</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ids/plan_hash/index.html">pysrc.tuning.core.ids.plan_hash</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ids/spec_hash/index.html">pysrc.tuning.core.ids.spec_hash</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ids/task_id/index.html">pysrc.tuning.core.ids.task_id</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/ir/index.html">pysrc.tuning.core.ir</a><input aria-label="Toggle navigation of pysrc.tuning.core.ir" class="toctree-checkbox" id="toctree-checkbox-86" name="toctree-checkbox-86" role="switch" type="checkbox"/><label for="toctree-checkbox-86"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/masking/index.html">pysrc.tuning.core.ir.masking</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/nodes/index.html">pysrc.tuning.core.ir.nodes</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/objective_ir/index.html">pysrc.tuning.core.ir.objective_ir</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/promotion_ir/index.html">pysrc.tuning.core.ir.promotion_ir</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/search_ir/index.html">pysrc.tuning.core.ir.search_ir</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/task_ir/index.html">pysrc.tuning.core.ir.task_ir</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/ir/validation_ir/index.html">pysrc.tuning.core.ir.validation_ir</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/meta_learning/index.html">pysrc.tuning.core.meta_learning</a><input aria-label="Toggle navigation of pysrc.tuning.core.meta_learning" class="toctree-checkbox" id="toctree-checkbox-87" name="toctree-checkbox-87" role="switch" type="checkbox"/><label for="toctree-checkbox-87"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/context_features/index.html">pysrc.tuning.core.meta_learning.context_features</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/experiment_memory/index.html">pysrc.tuning.core.meta_learning.experiment_memory</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/priors/index.html">pysrc.tuning.core.meta_learning.priors</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/recommender/index.html">pysrc.tuning.core.meta_learning.recommender</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/retrain_policy_logic/index.html">pysrc.tuning.core.meta_learning.retrain_policy_logic</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/meta_learning/transfer/index.html">pysrc.tuning.core.meta_learning.transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/objectives/index.html">pysrc.tuning.core.objectives</a><input aria-label="Toggle navigation of pysrc.tuning.core.objectives" class="toctree-checkbox" id="toctree-checkbox-88" name="toctree-checkbox-88" role="switch" type="checkbox"/><label for="toctree-checkbox-88"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/capacity/index.html">pysrc.tuning.core.objectives.capacity</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/composite_score/index.html">pysrc.tuning.core.objectives.composite_score</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/metrics/index.html">pysrc.tuning.core.objectives.metrics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/pareto/index.html">pysrc.tuning.core.objectives.pareto</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/penalties/index.html">pysrc.tuning.core.objectives.penalties</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/objectives/stability/index.html">pysrc.tuning.core.objectives.stability</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/planning/index.html">pysrc.tuning.core.planning</a><input aria-label="Toggle navigation of pysrc.tuning.core.planning" class="toctree-checkbox" id="toctree-checkbox-89" name="toctree-checkbox-89" role="switch" type="checkbox"/><label for="toctree-checkbox-89"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/cache_plan/index.html">pysrc.tuning.core.planning.cache_plan</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/execution_plan/index.html">pysrc.tuning.core.planning.execution_plan</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/lowering/index.html">pysrc.tuning.core.planning.lowering</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/partition_plan/index.html">pysrc.tuning.core.planning.partition_plan</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/plan_models/index.html">pysrc.tuning.core.planning.plan_models</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/planning/search_plan/index.html">pysrc.tuning.core.planning.search_plan</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/registries/index.html">pysrc.tuning.core.registries</a><input aria-label="Toggle navigation of pysrc.tuning.core.registries" class="toctree-checkbox" id="toctree-checkbox-90" name="toctree-checkbox-90" role="switch" type="checkbox"/><label for="toctree-checkbox-90"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/feature_adapter_registry/index.html">pysrc.tuning.core.registries.feature_adapter_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/gate_registry/index.html">pysrc.tuning.core.registries.gate_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/model_registry/index.html">pysrc.tuning.core.registries.model_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/objective_registry/index.html">pysrc.tuning.core.registries.objective_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/planner_registry/index.html">pysrc.tuning.core.registries.planner_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/search_registry/index.html">pysrc.tuning.core.registries.search_registry</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/registries/validation_registry/index.html">pysrc.tuning.core.registries.validation_registry</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/search/index.html">pysrc.tuning.core.search</a><input aria-label="Toggle navigation of pysrc.tuning.core.search" class="toctree-checkbox" id="toctree-checkbox-91" name="toctree-checkbox-91" role="switch" type="checkbox"/><label for="toctree-checkbox-91"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/bayes_opt/index.html">pysrc.tuning.core.search.bayes_opt</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/constraints/index.html">pysrc.tuning.core.search.constraints</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/dimensions/index.html">pysrc.tuning.core.search.dimensions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/evolutionary/index.html">pysrc.tuning.core.search.evolutionary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/multi_fidelity/index.html">pysrc.tuning.core.search.multi_fidelity</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/sampler/index.html">pysrc.tuning.core.search.sampler</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/space/index.html">pysrc.tuning.core.search.space</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/search/warm_start/index.html">pysrc.tuning.core.search.warm_start</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/specs/index.html">pysrc.tuning.core.specs</a><input aria-label="Toggle navigation of pysrc.tuning.core.specs" class="toctree-checkbox" id="toctree-checkbox-92" name="toctree-checkbox-92" role="switch" type="checkbox"/><label for="toctree-checkbox-92"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/live_trigger_spec/index.html">pysrc.tuning.core.specs.live_trigger_spec</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/objective_spec/index.html">pysrc.tuning.core.specs.objective_spec</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/promotion_spec/index.html">pysrc.tuning.core.specs.promotion_spec</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/search_space_spec/index.html">pysrc.tuning.core.specs.search_space_spec</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/tuning_job_spec/index.html">pysrc.tuning.core.specs.tuning_job_spec</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/specs/validation_spec/index.html">pysrc.tuning.core.specs.validation_spec</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/tasks/index.html">pysrc.tuning.core.tasks</a><input aria-label="Toggle navigation of pysrc.tuning.core.tasks" class="toctree-checkbox" id="toctree-checkbox-93" name="toctree-checkbox-93" role="switch" type="checkbox"/><label for="toctree-checkbox-93"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/dataset_views/index.html">pysrc.tuning.core.tasks.dataset_views</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/labels/index.html">pysrc.tuning.core.tasks.labels</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/regime_projection/index.html">pysrc.tuning.core.tasks.regime_projection</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/segmentation/index.html">pysrc.tuning.core.tasks.segmentation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/task_builder/index.html">pysrc.tuning.core.tasks.task_builder</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/task_keys/index.html">pysrc.tuning.core.tasks.task_keys</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/tasks/task_manifest/index.html">pysrc.tuning.core.tasks.task_manifest</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/validation/index.html">pysrc.tuning.core.validation</a><input aria-label="Toggle navigation of pysrc.tuning.core.validation" class="toctree-checkbox" id="toctree-checkbox-94" name="toctree-checkbox-94" role="switch" type="checkbox"/><label for="toctree-checkbox-94"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/cost_stress/index.html">pysrc.tuning.core.validation.cost_stress</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/cpcv/index.html">pysrc.tuning.core.validation.cpcv</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/determinism/index.html">pysrc.tuning.core.validation.determinism</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/embargo/index.html">pysrc.tuning.core.validation.embargo</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/leakage/index.html">pysrc.tuning.core.validation.leakage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/purged_cv/index.html">pysrc.tuning.core.validation.purged_cv</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/regime_splits/index.html">pysrc.tuning.core.validation.regime_splits</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/replay_consistency/index.html">pysrc.tuning.core.validation.replay_consistency</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation/walkforward/index.html">pysrc.tuning.core.validation.walkforward</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../core/validation_ir/index.html">pysrc.tuning.core.validation_ir</a><input aria-label="Toggle navigation of pysrc.tuning.core.validation_ir" class="toctree-checkbox" id="toctree-checkbox-95" name="toctree-checkbox-95" role="switch" type="checkbox"/><label for="toctree-checkbox-95"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation_ir/compatibility_checks/index.html">pysrc.tuning.core.validation_ir.compatibility_checks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation_ir/determinism_checks/index.html">pysrc.tuning.core.validation_ir.determinism_checks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation_ir/pit_checks/index.html">pysrc.tuning.core.validation_ir.pit_checks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation_ir/schema_checks/index.html">pysrc.tuning.core.validation_ir.schema_checks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../core/validation_ir/structural/index.html">pysrc.tuning.core.validation_ir.structural</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4 current has-children"><a class="reference internal" href="../index.html">pysrc.tuning.engines</a><input aria-label="Toggle navigation of pysrc.tuning.engines" checked="" class="toctree-checkbox" id="toctree-checkbox-96" name="toctree-checkbox-96" role="switch" type="checkbox"/><label for="toctree-checkbox-96"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l5 current current-page"><a class="current reference internal" href="#">pysrc.tuning.engines.bayes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../grid/index.html">pysrc.tuning.engines.grid</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../optuna/index.html">pysrc.tuning.engines.optuna</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../random/index.html">pysrc.tuning.engines.random</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../execution/index.html">pysrc.tuning.execution</a><input aria-label="Toggle navigation of pysrc.tuning.execution" class="toctree-checkbox" id="toctree-checkbox-97" name="toctree-checkbox-97" role="switch" type="checkbox"/><label for="toctree-checkbox-97"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../execution/caching/index.html">pysrc.tuning.execution.caching</a><input aria-label="Toggle navigation of pysrc.tuning.execution.caching" class="toctree-checkbox" id="toctree-checkbox-98" name="toctree-checkbox-98" role="switch" type="checkbox"/><label for="toctree-checkbox-98"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/caching/artifact_cache/index.html">pysrc.tuning.execution.caching.artifact_cache</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/caching/feature_cache/index.html">pysrc.tuning.execution.caching.feature_cache</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/caching/ir_cache/index.html">pysrc.tuning.execution.caching.ir_cache</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/caching/plan_cache/index.html">pysrc.tuning.execution.caching.plan_cache</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/caching/spec_cache/index.html">pysrc.tuning.execution.caching.spec_cache</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../execution/checkpoints/index.html">pysrc.tuning.execution.checkpoints</a><input aria-label="Toggle navigation of pysrc.tuning.execution.checkpoints" class="toctree-checkbox" id="toctree-checkbox-99" name="toctree-checkbox-99" role="switch" type="checkbox"/><label for="toctree-checkbox-99"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/checkpoints/candidate_store/index.html">pysrc.tuning.execution.checkpoints.candidate_store</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/checkpoints/model_store/index.html">pysrc.tuning.execution.checkpoints.model_store</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/checkpoints/recovery/index.html">pysrc.tuning.execution.checkpoints.recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../execution/executors/index.html">pysrc.tuning.execution.executors</a><input aria-label="Toggle navigation of pysrc.tuning.execution.executors" class="toctree-checkbox" id="toctree-checkbox-100" name="toctree-checkbox-100" role="switch" type="checkbox"/><label for="toctree-checkbox-100"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/executors/distributed/index.html">pysrc.tuning.execution.executors.distributed</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/executors/gpu_batch/index.html">pysrc.tuning.execution.executors.gpu_batch</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/executors/local/index.html">pysrc.tuning.execution.executors.local</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../execution/executors/multiprocessing/index.html">pysrc.tuning.execution.executors.multiprocessing</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../execution/run_replay_plan/index.html">pysrc.tuning.execution.run_replay_plan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../execution/run_search_plan/index.html">pysrc.tuning.execution.run_search_plan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../execution/run_shadow_plan/index.html">pysrc.tuning.execution.run_shadow_plan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../execution/run_training_plan/index.html">pysrc.tuning.execution.run_training_plan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../execution/run_validation_plan/index.html">pysrc.tuning.execution.run_validation_plan</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../hparam_search/index.html">pysrc.tuning.hparam_search</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../live/index.html">pysrc.tuning.live</a><input aria-label="Toggle navigation of pysrc.tuning.live" class="toctree-checkbox" id="toctree-checkbox-101" name="toctree-checkbox-101" role="switch" type="checkbox"/><label for="toctree-checkbox-101"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../live/event_router/index.html">pysrc.tuning.live.event_router</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/inference_adapter/index.html">pysrc.tuning.live.inference_adapter</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/latency_budget/index.html">pysrc.tuning.live.latency_budget</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/online_features/index.html">pysrc.tuning.live.online_features</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/runtime_state/index.html">pysrc.tuning.live.runtime_state</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/stream_listener/index.html">pysrc.tuning.live.stream_listener</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../live/trigger_capture/index.html">pysrc.tuning.live.trigger_capture</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../monitoring/index.html">pysrc.tuning.monitoring</a><input aria-label="Toggle navigation of pysrc.tuning.monitoring" class="toctree-checkbox" id="toctree-checkbox-102" name="toctree-checkbox-102" role="switch" type="checkbox"/><label for="toctree-checkbox-102"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/alerts/index.html">pysrc.tuning.monitoring.alerts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/dashboards/index.html">pysrc.tuning.monitoring.dashboards</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/drift/index.html">pysrc.tuning.monitoring.drift</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/latency/index.html">pysrc.tuning.monitoring.latency</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/slippage/index.html">pysrc.tuning.monitoring.slippage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/throughput/index.html">pysrc.tuning.monitoring.throughput</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../monitoring/tracing/index.html">pysrc.tuning.monitoring.tracing</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../orchestration/index.html">pysrc.tuning.orchestration</a><input aria-label="Toggle navigation of pysrc.tuning.orchestration" class="toctree-checkbox" id="toctree-checkbox-103" name="toctree-checkbox-103" role="switch" type="checkbox"/><label for="toctree-checkbox-103"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/budget_manager/index.html">pysrc.tuning.orchestration.budget_manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/command_bus/index.html">pysrc.tuning.orchestration.command_bus</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/job_runner/index.html">pysrc.tuning.orchestration.job_runner</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/partition_dispatch/index.html">pysrc.tuning.orchestration.partition_dispatch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/retries/index.html">pysrc.tuning.orchestration.retries</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/scheduler/index.html">pysrc.tuning.orchestration.scheduler</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/state_machine/index.html">pysrc.tuning.orchestration.state_machine</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../orchestration/work_router/index.html">pysrc.tuning.orchestration.work_router</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../promotion/index.html">pysrc.tuning.promotion</a><input aria-label="Toggle navigation of pysrc.tuning.promotion" class="toctree-checkbox" id="toctree-checkbox-104" name="toctree-checkbox-104" role="switch" type="checkbox"/><label for="toctree-checkbox-104"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/approvals/index.html">pysrc.tuning.promotion.approvals</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/capped_blend/index.html">pysrc.tuning.promotion.capped_blend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/full_promotion/index.html">pysrc.tuning.promotion.full_promotion</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/live_checkpoint_switch/index.html">pysrc.tuning.promotion.live_checkpoint_switch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/rollback/index.html">pysrc.tuning.promotion.rollback</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../promotion/shadow_mode/index.html">pysrc.tuning.promotion.shadow_mode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../registry/index.html">pysrc.tuning.registry</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../reports/index.html">pysrc.tuning.reports</a><input aria-label="Toggle navigation of pysrc.tuning.reports" class="toctree-checkbox" id="toctree-checkbox-105" name="toctree-checkbox-105" role="switch" type="checkbox"/><label for="toctree-checkbox-105"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/drift_report/index.html">pysrc.tuning.reports.drift_report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/gate_report/index.html">pysrc.tuning.reports.gate_report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/promotion_report/index.html">pysrc.tuning.reports.promotion_report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/robustness_report/index.html">pysrc.tuning.reports.robustness_report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/tuning_report/index.html">pysrc.tuning.reports.tuning_report</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reports/validation_report/index.html">pysrc.tuning.reports.validation_report</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../result/index.html">pysrc.tuning.result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../space/index.html">pysrc.tuning.space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../specs/index.html">pysrc.tuning.specs</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../utils/index.html">pysrc.tuning.utils</a><input aria-label="Toggle navigation of pysrc.tuning.utils" class="toctree-checkbox" id="toctree-checkbox-106" name="toctree-checkbox-106" role="switch" type="checkbox"/><label for="toctree-checkbox-106"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../utils/clocks/index.html">pysrc.tuning.utils.clocks</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../utils/imports/index.html">pysrc.tuning.utils.imports</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../utils/logging/index.html">pysrc.tuning.utils.logging</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../utils/seeds/index.html">pysrc.tuning.utils.seeds</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../utils/typing/index.html">pysrc.tuning.utils.typing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/index.html">pysrc.utils</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../validation/index.html">pysrc.validation</a><input aria-label="Toggle navigation of pysrc.validation" class="toctree-checkbox" id="toctree-checkbox-107" name="toctree-checkbox-107" role="switch" type="checkbox"/><label for="toctree-checkbox-107"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../validation/task_validity/index.html">pysrc.validation.task_validity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_gate/index.html">marketmind_gate</a><input aria-label="Toggle navigation of marketmind_gate" class="toctree-checkbox" id="toctree-checkbox-108" name="toctree-checkbox-108" role="switch" type="checkbox"/><label for="toctree-checkbox-108"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_gate/cli/index.html">marketmind_gate.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_gate/errors/index.html">marketmind_gate.errors</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../marketmind_gate/gates/index.html">marketmind_gate.gates</a><input aria-label="Toggle navigation of marketmind_gate.gates" class="toctree-checkbox" id="toctree-checkbox-109" name="toctree-checkbox-109" role="switch" type="checkbox"/><label for="toctree-checkbox-109"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/core/index.html">marketmind_gate.gates.core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/decision/index.html">marketmind_gate.gates.decision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/integrity/index.html">marketmind_gate.gates.integrity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/invariants/index.html">marketmind_gate.gates.invariants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/meta_learner_scaffold/index.html">marketmind_gate.gates.meta_learner_scaffold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/phase2_ml_evidence_shell/index.html">marketmind_gate.gates.phase2_ml_evidence_shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/policy/index.html">marketmind_gate.gates.policy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/gates/schema/index.html">marketmind_gate.gates.schema</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../marketmind_gate/hashing/index.html">marketmind_gate.hashing</a><input aria-label="Toggle navigation of marketmind_gate.hashing" class="toctree-checkbox" id="toctree-checkbox-110" name="toctree-checkbox-110" role="switch" type="checkbox"/><label for="toctree-checkbox-110"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/hashing/canonical/index.html">marketmind_gate.hashing.canonical</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../marketmind_gate/io/index.html">marketmind_gate.io</a><input aria-label="Toggle navigation of marketmind_gate.io" class="toctree-checkbox" id="toctree-checkbox-111" name="toctree-checkbox-111" role="switch" type="checkbox"/><label for="toctree-checkbox-111"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/io/resolvers/index.html">marketmind_gate.io.resolvers</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../marketmind_gate/policy/index.html">marketmind_gate.policy</a><input aria-label="Toggle navigation of marketmind_gate.policy" class="toctree-checkbox" id="toctree-checkbox-112" name="toctree-checkbox-112" role="switch" type="checkbox"/><label for="toctree-checkbox-112"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../marketmind_gate/policy/loader/index.html">marketmind_gate.policy.loader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_cuml/index.html">marketmind_cuml</a><input aria-label="Toggle navigation of marketmind_cuml" class="toctree-checkbox" id="toctree-checkbox-113" name="toctree-checkbox-113" role="switch" type="checkbox"/><label for="toctree-checkbox-113"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_cuml/plugin/index.html">marketmind_cuml.plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_cupy/index.html">marketmind_cupy</a><input aria-label="Toggle navigation of marketmind_cupy" class="toctree-checkbox" id="toctree-checkbox-114" name="toctree-checkbox-114" role="switch" type="checkbox"/><label for="toctree-checkbox-114"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_cupy/plugin/index.html">marketmind_cupy.plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_polars/index.html">marketmind_polars</a><input aria-label="Toggle navigation of marketmind_polars" class="toctree-checkbox" id="toctree-checkbox-115" name="toctree-checkbox-115" role="switch" type="checkbox"/><label for="toctree-checkbox-115"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_polars/plugin/index.html">marketmind_polars.plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_torch/index.html">marketmind_torch</a><input aria-label="Toggle navigation of marketmind_torch" class="toctree-checkbox" id="toctree-checkbox-116" name="toctree-checkbox-116" role="switch" type="checkbox"/><label for="toctree-checkbox-116"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_torch/plugin/index.html">marketmind_torch.plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../marketmind_xgboost/index.html">marketmind_xgboost</a><input aria-label="Toggle navigation of marketmind_xgboost" class="toctree-checkbox" id="toctree-checkbox-117" name="toctree-checkbox-117" role="switch" type="checkbox"/><label for="toctree-checkbox-117"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../marketmind_xgboost/plugin/index.html">marketmind_xgboost.plugin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../../_sources/reference/pysrc/tuning/engines/bayes/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-pysrc.tuning.engines.bayes">
+<span id="pysrc-tuning-engines-bayes"></span><h1>pysrc.tuning.engines.bayes<a class="headerlink" href="#module-pysrc.tuning.engines.bayes" title="Link to this heading">¶</a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pysrc.tuning.engines.bayes.logger" title="pysrc.tuning.engines.bayes.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pysrc.tuning.engines.bayes.BayesEngine" title="pysrc.tuning.engines.bayes.BayesEngine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BayesEngine</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pysrc.tuning.engines.bayes.run" title="pysrc.tuning.engines.bayes.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(spec, space, objective_fn)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="pysrc.tuning.engines.bayes.logger">
+<span class="sig-prename descclassname"><span class="pre">pysrc.tuning.engines.bayes.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://www.structlog.org/en/stable/api.html#structlog.stdlib.BoundLogger" title="(in structlog v25.5)"><span class="pre">structlog.stdlib.BoundLogger</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Ellipsis</span></em><a class="headerlink" href="#pysrc.tuning.engines.bayes.logger" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pysrc.tuning.engines.bayes.run">
+<span class="sig-prename descclassname"><span class="pre">pysrc.tuning.engines.bayes.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective_fn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pysrc.tuning.engines.bayes.run" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> (<a class="reference internal" href="../../specs/index.html#pysrc.tuning.specs.TunerSpec" title="pysrc.tuning.specs.TunerSpec"><em>TunerSpec</em></a>)</p></li>
+<li><p><strong>space</strong> (<a class="reference internal" href="../../core/search/space/index.html#pysrc.tuning.core.search.space.SearchSpace" title="pysrc.tuning.core.search.space.SearchSpace"><em>SearchSpace</em></a>)</p></li>
+<li><p><strong>objective_fn</strong> (<em>Callable</em><em>[</em><em>[</em><em>ParamPoint</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../../specs/index.html#pysrc.tuning.specs.TuningResult" title="pysrc.tuning.specs.TuningResult">TuningResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pysrc.tuning.engines.bayes.BayesEngine">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysrc.tuning.engines.bayes.</span></span><span class="sig-name descname"><span class="pre">BayesEngine</span></span><a class="headerlink" href="#pysrc.tuning.engines.bayes.BayesEngine" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../grid/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">pysrc.tuning.engines.grid</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">pysrc.tuning.engines</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025-2026, Mark Wuenschel
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">pysrc.tuning.engines.bayes</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#pysrc.tuning.engines.bayes.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.tuning.engines.bayes.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.tuning.engines.bayes.BayesEngine"><code class="docutils literal notranslate"><span class="pre">BayesEngine</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../../_static/documentation_options.js?v=fd2d6782"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

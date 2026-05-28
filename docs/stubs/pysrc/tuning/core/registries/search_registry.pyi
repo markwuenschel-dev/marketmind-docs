@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+SearchRegistry: versioned registry for SearchProtocol implementations.
+"""
+
+def register(name: str, version: str) -> Callable[[type[SearchProtocol]], type[SearchProtocol]]: ...
+def get(name: str, version: str = ...) -> type[SearchProtocol]: ...
+def list_registered() -> list[tuple[str, str]]: ...

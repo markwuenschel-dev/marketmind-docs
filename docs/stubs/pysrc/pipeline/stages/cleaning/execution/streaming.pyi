@@ -1,0 +1,6 @@
+from typing import Any
+
+pl: Any
+class StreamingCleanerPipeline:
+    def __init__(self: Any, pipeline: BuiltCleaningPipeline | CleaningPipelineSpec | Mapping[str, Any], *, buffer_size: int = ..., window: int | None = ...) -> None: ...
+    async def process_stream(self: Any, stream_gen: AsyncGenerator[Any, None], *, context: CleaningRuntimeContext | None = ..., return_result: bool = ...) -> AsyncGenerator[Any, None]: ...

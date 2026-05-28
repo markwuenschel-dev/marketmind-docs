@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Canonical SHA-256 fingerprints for W1 real-lane parity (no import cycle with phase2 contract).
+"""
+
+def derive_w1_market_panel_fingerprint(*, universe_id: str, start_ts: str, end_ts: str, symbols: tuple[str, ...], price_fields: tuple[str, ...], regime_label_source: str, fixture_snapshot_sha256: str) -> str: ...
+def derive_w1_splits_fingerprint(*, cfg: W1BaselineConfig) -> str: ...
+def derive_w1_cost_assumptions_fingerprint(*, spread_bps: float, slippage_bps: float, borrow_rate_ann: float) -> str: ...

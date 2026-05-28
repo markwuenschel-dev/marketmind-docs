@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+PlannerRegistry: versioned registry for PlannerProtocol implementations.
+"""
+
+def register(name: str, version: str) -> Callable[[type[PlannerProtocol]], type[PlannerProtocol]]: ...
+def get(name: str, version: str = ...) -> type[PlannerProtocol]: ...
+def list_registered() -> list[tuple[str, str]]: ...

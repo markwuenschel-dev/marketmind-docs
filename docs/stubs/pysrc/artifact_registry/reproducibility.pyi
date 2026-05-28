@@ -1,0 +1,13 @@
+from typing import Any
+
+"""
+Reproducibility and lineage helpers (Programming Guidelines §7.2).
+
+Used by bundle writers and the gate CLI to share determinism-tier validation and to
+build consistent ``gate_result.json`` metadata echoes.
+"""
+
+DETERMINISM_TIER_VALUES: Final[frozenset[str]] = ...
+def validate_plan_reproducibility_fields(plan: Mapping[str, Any]) -> tuple[bool, str, str]: ...
+def collect_bundle_reproducibility_echo(bundle_path: Path) -> dict[str, Any]: ...
+def json_artifact_lineage_fields(*, cas_id: str, attest_id: str | None = ..., schema_version: str | None = ..., determinism_tier: str | None = ...) -> dict[str, str]: ...

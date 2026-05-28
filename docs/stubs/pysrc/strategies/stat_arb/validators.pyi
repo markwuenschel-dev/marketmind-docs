@@ -1,0 +1,3 @@
+from typing import Any
+
+def validate_stat_arb_runtime() -> None: ...

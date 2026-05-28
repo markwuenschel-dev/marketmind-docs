@@ -1,0 +1,6 @@
+from typing import Any
+
+class FundamentalDataManager(AbstractAPIDataManager):
+    ...
+class BloombergSource(APIDataSource):
+    def __init__(self: Any, config: Any) -> Any: ...

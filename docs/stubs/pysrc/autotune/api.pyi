@@ -1,0 +1,23 @@
+from typing import Any
+
+"""
+Autotune public API.
+
+Typed contracts for hyperparameter search coordination.
+Integrates with tuning subsystem for execution.
+
+TODO: Registry hook for search strategy selection.
+TODO: Planner integration for resource allocation.
+"""
+
+T: Any
+class AutotuneConfig:
+    strategy: str = ...
+    max_iterations: int = ...
+    parallel_trials: int = ...
+    early_stopping: bool = ...
+class ObjectiveFn(Protocol):
+    ...
+class AutotuneAPI(ABC):
+    def search(self: Any, objective: ObjectiveFn, space: SearchSpace, config: AutotuneConfig, *, callbacks: Sequence[Callable[[TuningResult], None]] | None = ...) -> TuningResult: ...
+    def resume(self: Any, run_id: str) -> TuningResult: ...

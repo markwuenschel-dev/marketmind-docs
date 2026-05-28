@@ -1,0 +1,3 @@
+from typing import Any
+
+def main(series_specs: tuple[str, ...], config_path: Path, output_dir: Path, dedup_window_days: int) -> None: ...

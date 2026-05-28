@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+ObjectiveRegistry: versioned registry for ObjectiveProtocol implementations.
+"""
+
+def register(name: str, version: str) -> Callable[[type[ObjectiveProtocol]], type[ObjectiveProtocol]]: ...
+def get(name: str, version: str = ...) -> type[ObjectiveProtocol]: ...
+def list_registered() -> list[tuple[str, str]]: ...

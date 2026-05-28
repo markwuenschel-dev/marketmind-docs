@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Metrics for the W2-SU signal-usability panel.
+"""
+
+def compute_signal_usability_metrics(panel: pd.DataFrame) -> dict[str, object]: ...
+def compute_v1_signal_usability_metrics(panel: pd.DataFrame, baselines: dict[str, dict[str, object]]) -> dict[str, object]: ...
+def evaluate_baseline_on_split(baselines: dict[str, dict[str, object]], baseline_id: str, split_id: str) -> float: ...

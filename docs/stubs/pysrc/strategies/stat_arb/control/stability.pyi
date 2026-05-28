@@ -1,0 +1,3 @@
+from typing import Any
+
+def analyze_controller_stability() -> None: ...

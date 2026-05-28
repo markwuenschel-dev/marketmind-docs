@@ -1,0 +1,6 @@
+fidelity
+========
+
+.. py:module:: fidelity
+
+

@@ -1,0 +1,3 @@
+from typing import Any
+
+def build_cleaning_pipeline(spec: CleaningPipelineSpec | Mapping[str, Any]) -> BuiltCleaningPipeline: ...

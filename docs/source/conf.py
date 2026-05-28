@@ -24,15 +24,19 @@ copyright = "2025-2026, Mark Wuenschel"
 def extract_release(version_text: str) -> str:
     """Latest ``## Version M.m.p`` heading in VERSION.md (ledger is newest-first)."""
     pattern = re.compile(
-        r"^##\s*Version\s+([0-9]+\.[0-9]+\.[0-9]+)",
+        r"^##\s*Version\s+([0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9_.-]+)?)",
         re.MULTILINE,
     )
     matches = pattern.findall(version_text)
     if not matches:
         return "0.0.0"
 
-    def _semver_key(v: str) -> tuple[int, int, int]:
-        return tuple(int(p) for p in v.split(".", 2))
+    def _semver_key(v: str) -> tuple[int, int, int, int]:
+        base, _, suffix = v.partition("-")
+        major, minor, patch = (int(p) for p in base.split(".", 2))
+        # Draft/pre-release entries in VERSION.md are still the current docs
+        # truth when they are the newest ledger heading.
+        return (major, minor, patch, 1 if suffix else 0)
 
     return max(matches, key=_semver_key)
 
@@ -132,12 +136,11 @@ autodoc_pydantic_settings_show_config_member = True
 mermaid_output_format = "svg"
 
 autoapi_type = "python"
-autoapi_add_toctree_entry = True
+autoapi_add_toctree_entry = False
 autoapi_dirs = [str(STUBS_DIR)]
 autoapi_python_use_stub_files = True
 autoapi_ignore = [
     "*/tests/*",
-    "*/__init__.py",
 ]
 autoapi_options = [
     "members",
@@ -205,73 +208,7 @@ class _SuppressAutoapiPlaceholder(logging.Filter):
         return not str(msg).startswith("Unknown type: placeholder")
 
 
-def _patch_autoapi_duplicate_source(
-    app: Sphinx, docname: str, source: list[str]
-) -> None:
-    """In-memory fixes for a few AutoAPI pages where stub expansion collides in-doc."""
-    import re
-
-    if docname == "reference/srcPy/data/ib_api/index":
-        t = source[0]
-        t = t.replace(
-            "   srcPy.data.ib_api.IBKRConnectionError\n   srcPy.data.ib_api.IBKRConnectionError\n",
-            "   srcPy.data.ib_api.IBKRConnectionError\n",
-        )
-        t = re.sub(
-            r"\n\.\. py:exception:: IBKRConnectionError\n\n   Bases: :py:obj:`Exception`\n\n\n   Common base class for all non-exit exceptions.\n\n\n",
-            "\n",
-            t,
-            count=1,
-        )
-        t = re.sub(
-            r"\n\.\. py:exception:: IBKRConnectionError\n\n   Bases: :py:obj:`RuntimeError`\n\n\n   Unspecified run-time error.\n\n\n",
-            "\n",
-            t,
-            count=1,
-        )
-        source[0] = t
-    elif docname == "reference/srcPy/ops/index":
-        t = source[0]
-        t = t.replace(
-            "   srcPy.ops.configure_logger\n   srcPy.ops.multi_tier_cache\n   srcPy.ops.get_logger\n",
-            "   srcPy.ops.configure_logger\n   srcPy.ops.get_logger\n",
-        )
-        needle = (
-            ".. py:function:: multi_tier_cache(ttl = 60, version = 'v1', "
-            "persist_large_objects = False, key_fn = None, redis_client=None, "
-            "l2_type = 'memfd', check_l4_on_miss = False)\n"
-        )
-        if needle in t:
-            after = t.split(needle, 1)[1]
-            if not after.lstrip().startswith(":no-index:"):
-                t = t.replace(needle, needle + "   :no-index:\n")
-        source[0] = t
-    elif docname == "reference/srcPy/pipeline/core/pipeline_core_base/index":
-        t = source[0]
-        t = t.replace(
-            "   srcPy.pipeline.core.pipeline_core_base.StepRegistry\n   srcPy.pipeline.core.pipeline_core_base.InT\n",
-            "   srcPy.pipeline.core.pipeline_core_base.InT\n",
-        )
-        block = ".. py:data:: StepRegistry\n   :type:  Any\n   :value: Ellipsis\n\n\n"
-        if block in t:
-            t = t.replace(block, "")
-        source[0] = t
-    elif docname == "reference/srcPy/pipeline/stages/cleaning/core/base/index":
-        t = source[0]
-        attr = (
-            "Attributes\n----------\n\n.. autoapisummary::\n\n"
-            "   srcPy.pipeline.stages.cleaning.core.base.PolarsDataFrame\n\n\n"
-        )
-        if attr in t:
-            t = t.replace(attr, "")
-        block = ".. py:data:: PolarsDataFrame\n   :type:  Any\n   :value: Ellipsis\n\n\n"
-        if block in t:
-            t = t.replace(block, "")
-        source[0] = t
-
-
 def setup(app: Sphinx) -> None:
     sphinx_logging.getLogger("autoapi._mapper").logger.addFilter(
         _SuppressAutoapiPlaceholder()
     )
-    app.connect("source-read", _patch_autoapi_duplicate_source)

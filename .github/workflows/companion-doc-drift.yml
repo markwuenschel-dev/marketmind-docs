@@ -19,3 +19,6 @@ jobs:
 
       - name: README title page vs VERSION.md
         run: python scripts/check_companion_version.py
+
+      - name: Companion docs match repository snapshot
+        run: python scripts/sync_from_marketmind.py --check-snapshot

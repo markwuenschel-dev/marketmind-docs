@@ -1,0 +1,3 @@
+from typing import Any
+
+def normalize_preprocessing_state(raw: Mapping[str, Any]) -> PreprocessingStateManifest: ...

@@ -1,3 +1,0 @@
-from typing import Any
-
-def build_meta(step_name: str, step_version: str, cfg: dict[str, Any]) -> dict[str, Any]: ...

@@ -1,0 +1,10 @@
+from typing import Any
+
+TECHNICAL: Any
+SCALING: Any
+SENTIMENT: Any
+TEMPORAL: Any
+SEQUENCE: Any
+EXPLAIN: Any
+EMBEDDING: Any
+TOPIC: Any

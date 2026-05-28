@@ -1,0 +1,13 @@
+from typing import Any
+
+"""
+Contracts for market-data source adapters.
+
+New source adapters should import from this module instead of ``base.py``.
+"""
+
+class DataSource(ABC):
+    def __init__(self: Any, config: dict[str, Any]) -> None: ...
+    async def get_historical(self: Any, symbol: str, start: str, end: str, *, eager: bool = ...) -> pl.LazyFrame | pl.DataFrame: ...
+    async def get_realtime(self: Any, symbol: str, *, interval: float = ...) -> AsyncIterator[pl.DataFrame]: ...
+    async def close(self: Any) -> None: ...

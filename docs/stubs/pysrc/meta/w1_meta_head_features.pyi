@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Shared 7-d PIT-legal features for W1 linear meta-head (regime one-hot + scaled task scalars).
+"""
+
+W1_META_HEAD_FEATURE_DIM: int = ...
+def w1_meta_head_feature_row(task: MetaTask) -> NDArray[np.float64]: ...
+def w1_meta_head_feature_matrix(tasks: tuple[MetaTask, ...]) -> NDArray[np.float64]: ...

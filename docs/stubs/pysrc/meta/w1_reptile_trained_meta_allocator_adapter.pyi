@@ -1,0 +1,29 @@
+from typing import Any
+
+"""
+Learned meta-allocator checkpoint adapter for W1 (``W1MetaAllocatorProtocol``).
+
+Scores come from **checkpoint weights** applied to PIT-legal task features (regime one-hot,
+``active_k``, ``horizon``). Closure-eligible W1 surfaces additionally require a **governed training
+lineage** validated at load time (runner allow-list, content-hash binding, fingerprint parity).
+
+**PASS** (harness): protocol-vs-learned split, plumbing quarantine, closure gating, adapter shape.
+
+**INSUFFICIENT** (evidence): governed learned checkpoint provenance beyond this validation —
+hand-authored or fixture checkpoints are never treated as production learned evidence.
+
+If the checkpoint is missing, structurally invalid, or parity-bound fields mismatch the W1 run,
+construction fails closed with
+:class:`~pysrc.meta.w1_reptile_challenger_bridge.W1ChallengerUnavailableError`.
+"""
+
+W1_LEARNED_CHECKPOINT_SCHEMA_V2: Final[str] = ...
+GOVERNED_W1_CHECKPOINT_TRAINED_BY_RUNNERS: Final[frozenset[str]] = ...
+def w1_learned_checkpoint_body_for_content_hash(raw: Mapping[str, Any]) -> dict[str, Any]: ...
+class ReptileTrainedMetaAllocatorAdapter:
+    def __init__(self: Any, checkpoint_path: Path, *, expected_signal_set_version: str, expected_training_task_pool_hash: str, expected_training_data_fingerprint: str, expected_training_splits_fingerprint: str) -> None: ...
+    def model_state_hash(self: Any) -> str: ...
+    def checkpoint_path(self: Any) -> Path: ...
+    def governed_checkpoint_lineage_verified(self: Any) -> bool: ...
+    def validated_checkpoint_metadata_block(self: Any) -> dict[str, Any]: ...
+    def predict_query_scores(self: Any, task: MetaTask, *, fold_index: int) -> tuple[float, ...]: ...

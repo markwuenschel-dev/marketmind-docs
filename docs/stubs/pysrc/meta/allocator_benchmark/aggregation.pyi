@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Signal-to-instrument aggregation for the W2 allocator benchmark bridge.
+"""
+
+WEIGHTED_SIGNAL_REQUIRED_COLUMNS: tuple[str, ...] = ...
+INSTRUMENT_SCORE_COLUMNS: tuple[str, ...] = ...
+def build_instrument_scores_from_weighted_signals(weighted_signal_rows: pd.DataFrame, config: W2AllocatorBenchmarkConfig | None = ...) -> pd.DataFrame: ...

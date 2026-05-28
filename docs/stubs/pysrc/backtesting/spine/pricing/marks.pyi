@@ -1,0 +1,3 @@
+from typing import Any
+
+def mark_to_market(snapshot: LedgerSnapshot, prices: dict[str, float]) -> float: ...

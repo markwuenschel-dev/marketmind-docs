@@ -1,0 +1,16 @@
+from typing import Any
+
+"""
+Screening report builder: in-memory only; reason_family derived from REASON_CODE_TO_FAMILY.
+
+Callers pass only reason_code when adding a stage; builder looks up reason_family
+via REASON_CODE_TO_FAMILY. No disk write in this module.
+"""
+
+class ScreeningReportBuilder:
+    SCHEMA_VERSION: Any
+    def __init__(self: Any, screening_run_id: str, pit_boundary: str, data_snapshot_hash: str, seed: int) -> None: ...
+    def add_candidate(self: Any, spec_hash: str, signal_name: str, slot_index: int | None = ..., evaluation_ordinal: int = ...) -> None: ...
+    def add_stage(self: Any, candidate_index: int, stage: ScreeningStage | str, status: ScreeningStatus | str, reason_code: ReasonCode | str | None = ..., reason_detail: str | None = ..., metrics: dict[str, Any] | None = ..., duration_ms: int = ..., timestamp: str | None = ...) -> None: ...
+    def set_final(self: Any, candidate_index: int, final_status: str, final_stage: str, final_reason_code: str | None = ...) -> None: ...
+    def serialize(self: Any) -> dict[str, Any]: ...

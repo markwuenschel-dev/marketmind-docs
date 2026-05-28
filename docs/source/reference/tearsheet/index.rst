@@ -1,0 +1,6 @@
+tearsheet
+=========
+
+.. py:module:: tearsheet
+
+

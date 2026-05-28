@@ -1,0 +1,3 @@
+from typing import Any
+
+def solve_xi_profile() -> None: ...

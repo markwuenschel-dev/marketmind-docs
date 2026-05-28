@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Dimension types and bounds utilities for typed search space navigation.
+"""
+
+def is_continuous(dim: DimensionSpec) -> bool: ...
+def is_discrete(dim: DimensionSpec) -> bool: ...
+def bounds(dim: DimensionSpec) -> tuple[float, float]: ...

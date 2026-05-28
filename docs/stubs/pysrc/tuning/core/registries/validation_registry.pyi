@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+ValidationRegistry: versioned registry for ValidatorProtocol implementations.
+"""
+
+def register(name: str, version: str) -> Callable[[type[ValidatorProtocol]], type[ValidatorProtocol]]: ...
+def get(name: str, version: str = ...) -> type[ValidatorProtocol]: ...
+def list_registered() -> list[tuple[str, str]]: ...

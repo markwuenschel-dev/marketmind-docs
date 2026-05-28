@@ -17,7 +17,7 @@ def main() -> int:
 
     readme_text = README.read_text(encoding="utf-8")
     m = re.search(
-        r"^Version\s+([0-9]+\.[0-9]+\.[0-9]+)",
+        r"^Version\s+([0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9_.-]+)?)",
         readme_text,
         re.MULTILINE,
     )

@@ -1,0 +1,3 @@
+from typing import Any
+
+def form_stat_arb_basket() -> None: ...

@@ -1,8 +1,10 @@
 # MarketMind Documentation
 
-Read the Docs for `marketmind-docs` is the publication layer for canonical documentation **mirrored** from the `MarketMind` repository. Companion Markdown under `docs/source/` is copied from `MarketMind/docs/src/`; the release ledger at the repo root is `VERSION.md` (same file as MarketMind for the aligned release). The published surface follows the current companion suite (README, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, governance registers, Phase II contract/playbook, protocols, specifications, and appendices).
+Read the Docs for `marketmind-docs` publishes the public documentation surface mirrored from the current `MarketMind` repository. Companion Markdown under `docs/source/` is copied from `MarketMind/docs/src/`; `VERSION.md` is copied from the MarketMind repository root.
 
-Older secondary pages (governance/legal stubs, contributor guides, tutorials) remain published alongside the mirrored suite; they are **not** sourced from `MarketMind/docs/src/` unless noted otherwise.
+The current companion suite records the Phase II broad reset after W3/W4 diagnostics, including the P2-MAP -> P2-MATRIX -> P2-NARROW -> P2-PORTFOLIO funnel and the supporting artifact, signal, threshold, and trainer-entry governance documents.
+
+Older governance/legal pages, contributor guidance, tutorials, and compatibility pages remain published where useful, but they are not treated as canonical `MarketMind/docs/src` mirrors unless listed in the companion suite below.
 
 ## Published Sections
 
@@ -12,13 +14,14 @@ Older secondary pages (governance/legal stubs, contributor guides, tutorials) re
 - [White Paper](WhitePaper.md)
 - [Release History](CHANGELOG.md)
 
-### Companion Suite
+### Current Companion Suite
 
 - [Implementation Plan](ImplementationPlan.md)
 - [Technical Roadmap](TechnicalRoadmap.md)
 - [Meta-Learning Core](MetaLearningCore.md)
 - [Meta-Learning Architecture Vision](MetaLearningArchitectureVision.md)
 - [Resolution Ledger](ResolutionLedger.md)
+- [Trainer Entry Decision Package](trainer_entry_decision_package.md)
 
 ### Governance / Phase II Controls
 
@@ -29,14 +32,11 @@ Older secondary pages (governance/legal stubs, contributor guides, tutorials) re
 
 ### Protocols and Appendices
 
-- [RiskFn Protocol](risk_protocol.md)
-- [Signal Generation Protocol](signal_generation_protocol.md)
-- [Task Validity Pilot Report](task_validity_pilot_report.md)
-- [Paper Trade Simulation Spec](paper_trade_sim_spec.md)
+- [Risk and Execution Realism Protocol](Risk_and_Execution_Realism_Protocol.md)
+- [Signal Governance Protocol](Signal_Governance_Protocol.md)
+- [Signal Reliability Schema](Signal_Reliability_Schema.md)
+- [Task Validity Pilot Report](Task_Validity_Pilot_Report_Canonical.md)
 - [Formatting Spec](FormattingSpec.md)
-- [Signal universe expansion policy](signal_universe_expansion_policy.md)
-- [Signal reliability schema (v0.1.1)](signal_reliability_schema_v0_1_1.md)
-- [Alt-data admissibility](alt_data_admissibility.md)
 
 ### Governance and Legal
 
@@ -69,13 +69,14 @@ Release History <CHANGELOG.md>
 ```{toctree}
 :hidden:
 :maxdepth: 2
-:caption: Companion Suite
+:caption: Current Companion Suite
 
 Implementation Plan <ImplementationPlan.md>
 Technical Roadmap <TechnicalRoadmap.md>
 Meta-Learning Core <MetaLearningCore.md>
 Meta-Learning Architecture Vision <MetaLearningArchitectureVision.md>
 Resolution Ledger <ResolutionLedger.md>
+Trainer Entry Decision Package <trainer_entry_decision_package.md>
 ```
 
 ```{toctree}
@@ -94,14 +95,11 @@ Phase II Research Execution Playbook <PhaseIIResearchExecutionPlaybook.md>
 :maxdepth: 2
 :caption: Protocols and Appendices
 
-RiskFn Protocol <risk_protocol.md>
-Signal Generation Protocol <signal_generation_protocol.md>
-Task Validity Pilot Report <task_validity_pilot_report.md>
-Paper Trade Simulation Spec <paper_trade_sim_spec.md>
+Risk and Execution Realism Protocol <Risk_and_Execution_Realism_Protocol.md>
+Signal Governance Protocol <Signal_Governance_Protocol.md>
+Signal Reliability Schema <Signal_Reliability_Schema.md>
+Task Validity Pilot Report <Task_Validity_Pilot_Report_Canonical.md>
 Formatting Spec <FormattingSpec.md>
-Signal universe expansion policy <signal_universe_expansion_policy.md>
-Signal reliability schema (v0.1.1) <signal_reliability_schema_v0_1_1.md>
-Alt-data admissibility <alt_data_admissibility.md>
 ```
 
 ```{toctree}
