@@ -1,0 +1,3 @@
+from typing import Any
+
+def build_governed_execution_spec(*, plan: PreprocessingPlan, state: PreprocessingStateManifest, backend: str, actual_materialization: str, schema_signature: str, has_cudf: bool = ..., has_polars_gpu: bool = ..., governance: GovernanceDecision | None = ..., evidence: ExecutionEvidence | None = ...) -> GovernedExecutionSpec: ...

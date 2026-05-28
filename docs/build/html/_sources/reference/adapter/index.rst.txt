@@ -1,0 +1,6 @@
+adapter
+=======
+
+.. py:module:: adapter
+
+

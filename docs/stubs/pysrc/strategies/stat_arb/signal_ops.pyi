@@ -1,0 +1,3 @@
+from typing import Any
+
+def transform_stat_arb_signal() -> None: ...

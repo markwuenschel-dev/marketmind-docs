@@ -1,0 +1,3 @@
+from typing import Any
+
+def evidence_to_mapping(evidence: ExecutionEvidence) -> dict[str, object]: ...

@@ -1,112 +1,133 @@
 # MarketMind Documentation
 
-Welcome to the official documentation for **MarketMind**, an intelligent and extensible platform for market prediction, analytics, and research.  
-This site provides guides, references, and resources for both users and contributors.
+Read the Docs for `marketmind-docs` publishes the public documentation surface mirrored from the current `MarketMind` repository. Companion Markdown under `docs/source/` is copied from `MarketMind/docs/src/`; `VERSION.md` is copied from the MarketMind repository root.
 
----
+The current companion suite records the Phase II broad reset after W3/W4 diagnostics, including the P2-MAP -> P2-MATRIX -> P2-NARROW -> P2-PORTFOLIO funnel and the supporting artifact, signal, threshold, and trainer-entry governance documents.
 
-## Table of Contents
+Older governance/legal pages, contributor guidance, tutorials, and compatibility pages remain published where useful, but they are not treated as canonical `MarketMind/docs/src` mirrors unless listed in the companion suite below.
 
-::::{admonition} Getting Started
-:class: dropdown
+## Published Sections
 
-- **[Getting Started](getting_started.md):**  
-  Learn how to install, configure, and quickly run MarketMind for the first time. Includes environment setup, basic usage, and troubleshooting tips.
+### Overview
 
-- **[Usage Guide](usage_guide.md):**  
-  A comprehensive manual covering all core features and workflows, including advanced analyst operations and day-to-day usage scenarios.
-::::
+- [README / Technical Overview](README.md)
+- [White Paper](WhitePaper.md)
+- [Release History](CHANGELOG.md)
 
-::::{admonition} System Design & Reference
-:class: dropdown
+### Current Companion Suite
 
-- **[System Architecture](architecture.md):**  
-  Explore the overall design, modular components, and data flow within MarketMind.
+- [Implementation Plan](ImplementationPlan.md)
+- [Technical Roadmap](TechnicalRoadmap.md)
+- [Meta-Learning Core](MetaLearningCore.md)
+- [Meta-Learning Architecture Vision](MetaLearningArchitectureVision.md)
+- [Resolution Ledger](ResolutionLedger.md)
+- [Trainer Entry Decision Package](trainer_entry_decision_package.md)
 
-- **[API Reference](api_reference.md):**  
-  Technical documentation for the MarketMind APIs, including functions, classes, endpoints, and data models for developers.
+### Governance / Phase II Controls
 
-- **[Regulatory Compliance](regulatory_compliance.md):**  
-  Details on how MarketMind meets applicable regulatory standards, reporting requirements, and audit trails.
+- [Threshold Governance Register](ThresholdGovernanceRegister.md)
+- [Data Governance Charter](DataGovernanceCharter.md)
+- [Phase II Artifact Contract](PhaseIIArtifactContract.md)
+- [Phase II Research Execution Playbook](PhaseIIResearchExecutionPlaybook.md)
 
-- **[Security Practices](security_practices.md):**  
-  Overview of security design, threat mitigation, access controls, and best practices.
+### Protocols and Appendices
 
-- **[Glossary](glossary.md):**  
-  Definitions of common terms, acronyms, and domain-specific language used in MarketMind.
+- [Risk and Execution Realism Protocol](Risk_and_Execution_Realism_Protocol.md)
+- [Signal Governance Protocol](Signal_Governance_Protocol.md)
+- [Signal Reliability Schema](Signal_Reliability_Schema.md)
+- [Task Validity Pilot Report](Task_Validity_Pilot_Report_Canonical.md)
+- [Formatting Spec](FormattingSpec.md)
 
-- **[Changelog](CHANGELOG.md):**  
-  Consolidated list of new features, improvements, and bug fixes across releases.
+### Governance and Legal
 
-::::
+- [Governance](GOVERNANCE.md)
+- [Model Card](MODEL_CARD.md)
+- [Privacy Policy](PRIVACY_POLICY.md)
+- [Risk Disclosure](RISK_DISCLOSURE.md)
+- [Reproducibility](REPRODUCIBILITY.md)
+- [Security Policy](SECURITY.md)
+- [License](LICENSE.md)
 
-::::{admonition} Tutorials & Notebooks
-:class: dropdown
+### Contributor and Engineering Guidance
 
-- **[Basic Prediction Tutorial](tutorials/basic_prediction.ipynb):**  
-  Step-by-step, hands-on notebook for running your first prediction with MarketMind.
+- [Programming Guidelines](contributors/coding_standards.md)
 
-- **[Advanced Features Tutorial](tutorials/advanced_features.ipynb):**  
-  Demonstrates powerful analytics, custom workflows, and deeper integrations.
+### Reference
 
-::::
+- [API Reference](reference/index.rst)
 
-::::{admonition} Contributor Resources
-:class: dropdown
-
-- **[Onboarding Guide](contributors/onboarding.md):**  
-  Get up to speed as a new contributor, including environment setup, tools, and tips.
-
-- **[Coding Standards](contributors/coding_standards.md):**  
-  Reference code style guidelines, naming conventions, and documentation standards.
-
-- **[Contribution Workflow](contributors/contribution_workflow.md):**  
-  Walkthrough of our Git workflow, review process, and how to submit effective pull requests.
-
-::::
-
-::::{admonition} Images, Diagrams, and Internal Docs
-:class: dropdown
-
-- **[Images directory](images/index.md):**
-  All architecture diagrams, charts, and other supporting images used throughout the docs.
-
-- **[Threat Model](internal/threat_model.md):**  
-  Internal documentation detailing the threat model, risk assessment, and mitigation strategies for the platform.  
-  *(Restricted: for maintainers only)*
-
-::::
-
----
-
-## Need Help?
-
-If you can’t find what you need, check the [FAQ](faq.md) or open an issue in the project repository.
-
----
 ```{toctree}
 :hidden:
 :maxdepth: 2
-:caption: Full Contents
+:caption: Overview
 
-getting_started.md
-usage_guide.md
-architecture.md
-api_reference.md
-regulatory_compliance.md
-security_practices.md
-glossary.md
-CHANGELOG.md
-faq.md
-tutorials/index.md
-tutorials/basic_prediction.ipynb
-tutorials/advanced_features.ipynb
-images/index.md
+README / Technical Overview <README.md>
+White Paper <WhitePaper.md>
+Release History <CHANGELOG.md>
+```
 
-contributors/onboarding.md
-contributors/coding_standards.md
-contributors/contribution_workflow.md
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Current Companion Suite
 
-internal/threat_model.md
+Implementation Plan <ImplementationPlan.md>
+Technical Roadmap <TechnicalRoadmap.md>
+Meta-Learning Core <MetaLearningCore.md>
+Meta-Learning Architecture Vision <MetaLearningArchitectureVision.md>
+Resolution Ledger <ResolutionLedger.md>
+Trainer Entry Decision Package <trainer_entry_decision_package.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Governance / Phase II Controls
+
+Threshold Governance Register <ThresholdGovernanceRegister.md>
+Data Governance Charter <DataGovernanceCharter.md>
+Phase II Artifact Contract <PhaseIIArtifactContract.md>
+Phase II Research Execution Playbook <PhaseIIResearchExecutionPlaybook.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Protocols and Appendices
+
+Risk and Execution Realism Protocol <Risk_and_Execution_Realism_Protocol.md>
+Signal Governance Protocol <Signal_Governance_Protocol.md>
+Signal Reliability Schema <Signal_Reliability_Schema.md>
+Task Validity Pilot Report <Task_Validity_Pilot_Report_Canonical.md>
+Formatting Spec <FormattingSpec.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Governance and Legal
+
+Governance <GOVERNANCE.md>
+Model Card <MODEL_CARD.md>
+Privacy Policy <PRIVACY_POLICY.md>
+Risk Disclosure <RISK_DISCLOSURE.md>
+Reproducibility <REPRODUCIBILITY.md>
+Security Policy <SECURITY.md>
+License <LICENSE.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Contributor and Engineering Docs
+
+Programming Guidelines <contributors/coding_standards.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Reference
 
 reference/index
+```

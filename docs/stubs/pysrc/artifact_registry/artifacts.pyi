@@ -1,0 +1,13 @@
+from typing import Any
+
+"""
+Canonical artifact I/O helpers for the ADR-002 artifact-registry surface.
+
+The Appendix C bundle layout remains unchanged, but helper ownership lives
+under ``pysrc.artifact_registry``.
+"""
+
+def read_json(path: Path) -> dict[str, Any]: ...
+def write_json(path: Path, data: dict[str, Any]) -> None: ...
+def list_bundle_files(bundle_dir: Path) -> list[Path]: ...
+def assert_bundle_complete(bundle_dir: Path, required: list[str] | None = ...) -> None: ...

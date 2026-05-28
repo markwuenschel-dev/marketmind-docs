@@ -1,0 +1,38 @@
+{
+  "api_roots": [
+    "pysrc",
+    "marketmind_gate",
+    "marketmind_cuml",
+    "marketmind_cupy",
+    "marketmind_polars",
+    "marketmind_torch",
+    "marketmind_xgboost"
+  ],
+  "files": {
+    "VERSION.md": "9fca13bb435786419733b5a7896ea99eb5ebf8ee3acecf02cdf93cfd856e031c",
+    "docs/source/DataGovernanceCharter.md": "0e696ff7e92f6e748c1716cda3ee6905b415186f07a888ad57a62f80ce67c43c",
+    "docs/source/FormattingSpec.md": "ae44ae0b7dcb3da178fbff2d41ba1219e588bf03d2cb7e1b73cd1806f7c28827",
+    "docs/source/ImplementationPlan.md": "71c618769a5512ce10f5fe1b50e889b4c00332a81790502a49662165c9715221",
+    "docs/source/MetaLearningArchitectureVision.md": "94cde179b9665d393f9798521ca339797c21cecf81bb9ffba9cbdea039d2dd58",
+    "docs/source/MetaLearningCore.md": "add1005c285f4fe609342630e3c2198a8cdc8248ec54e0fe5a1213d13f24014d",
+    "docs/source/PhaseIIArtifactContract.md": "0fc032f46e6c9acff0e656a682ed8c271b5fd539f46e0fb5810e7c2ae44669b1",
+    "docs/source/PhaseIIResearchExecutionPlaybook.md": "9dfabc3aee1c42ab133418d668951bfcff58042c1f6f4e26c8ccb758b7ad7b7d",
+    "docs/source/README.md": "0501c76290425e812314b47a5ebc87e5568f5926655dfa6cf272e8ccceb1d143",
+    "docs/source/ResolutionLedger.md": "a56d118cae85c987604ba332770f5fcb112b92393404aa0e717a149b6fed0cdc",
+    "docs/source/Risk_and_Execution_Realism_Protocol.md": "1c6bad20c398eb06fbaeee0edbc39f4e72f7f24922387394a77f12bd2a8d6a95",
+    "docs/source/Signal_Governance_Protocol.md": "cc5090c86127d3fa11a4a117527d5489fe8c3d365a94079d3c07b1279f94116c",
+    "docs/source/Signal_Reliability_Schema.md": "d326d1d56176af6dc85f54d989f3a8100fc11cebe32b4837936998118f4003c6",
+    "docs/source/Task_Validity_Pilot_Report_Canonical.md": "d487115b061f565f6535b143f5a991c96a3289b6615ce984affb7c89e8f05572",
+    "docs/source/TechnicalRoadmap.md": "bdda1154a71e08efe9b1e3a161ab11b33c6bf3e14363a611844c29a723657f51",
+    "docs/source/ThresholdGovernanceRegister.md": "c3de79d3193446cadaace0d60034f92515b1a5b465708384a3862f6b4c93eee0",
+    "docs/source/WhitePaper.md": "55ddf3ace8482551de73a4a11aa1f85babfecf4a31bee762d379c8e96670230b",
+    "docs/source/index.md": "59a37919d57ffaec7640f70910428d57570c879946f4c698490718c5f15ca71a",
+    "docs/source/reference/index.rst": "cdf20d17af238a4235a0d9d4aa667771c507b6189d675d2a0eb646df84e87082",
+    "docs/source/risk_protocol.md": "954cad947653bd8a3cd8fb887d2137bb31524f8aadc24fb5c9b8fd1659115ac4",
+    "docs/source/signal_generation_protocol.md": "fdc5df34ff1ac565c3518d3aca31d01c1d00aa83c857433b23f50163efee32ef",
+    "docs/source/signal_reliability_schema_v0_1_1.md": "223b7aa4a2d91380a11036e080e33758038fb65d944f694c295f54af02f0fae2",
+    "docs/source/task_validity_pilot_report.md": "aa88a29013d7bb3243a5aa038cf96c8d8495f16bd08417cc5d51ac527b63b403",
+    "docs/source/trainer_entry_decision_package.md": "b138a6a0cf278936ca94779f98de5eb239b04785c40f74e2dfed486232e2b48e"
+  },
+  "schema": 1
+}

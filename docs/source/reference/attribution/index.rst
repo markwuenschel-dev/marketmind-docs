@@ -1,0 +1,6 @@
+attribution
+===========
+
+.. py:module:: attribution
+
+

@@ -1,0 +1,3 @@
+from typing import Any
+
+def apply_stat_arb_risk_gates() -> None: ...

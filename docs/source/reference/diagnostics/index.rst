@@ -1,0 +1,6 @@
+diagnostics
+===========
+
+.. py:module:: diagnostics
+
+

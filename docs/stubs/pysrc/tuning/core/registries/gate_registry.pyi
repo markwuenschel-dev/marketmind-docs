@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+GateRegistry: versioned registry for GateProtocol implementations.
+"""
+
+def register(name: str, version: str) -> Callable[[type[GateProtocol]], type[GateProtocol]]: ...
+def get(name: str, version: str = ...) -> type[GateProtocol]: ...
+def list_registered() -> list[tuple[str, str]]: ...

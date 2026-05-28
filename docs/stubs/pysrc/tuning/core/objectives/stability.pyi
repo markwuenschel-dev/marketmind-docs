@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Stability metrics: variance of scores across folds to detect overfit candidates.
+"""
+
+def fold_score_variance(fold_scores: NDArray[np.float64]) -> float: ...
+def is_stable(fold_scores: NDArray[np.float64], max_var: float) -> bool: ...
+def stability_score(fold_scores: NDArray[np.float64]) -> float: ...

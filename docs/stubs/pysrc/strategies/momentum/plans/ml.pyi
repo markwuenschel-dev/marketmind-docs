@@ -1,0 +1,3 @@
+from typing import Any
+
+def build_plan(params: dict[str, Any]) -> FeaturePlan: ...

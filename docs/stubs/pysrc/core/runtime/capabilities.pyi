@@ -1,0 +1,3 @@
+from typing import Any
+
+CAPABILITIES: dict[str, list[object]] = ...

@@ -1,0 +1,9 @@
+from typing import Any
+
+"""
+Statistical validity gate: DSR, PBO, and Harvey t-stat checks.
+"""
+
+def deflated_sharpe_ratio(sharpe: float, n_trials: int, n_obs: int, skew: float = ..., kurtosis: float = ...) -> float: ...
+def passes_dsr_gate(dsr: float, threshold: float = ...) -> bool: ...
+def passes_harvey_tstat(t_stat: float, min_t: float = ...) -> bool: ...

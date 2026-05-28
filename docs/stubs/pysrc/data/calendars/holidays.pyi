@@ -1,0 +1,3 @@
+from typing import Any
+
+HOLIDAYS: Dict[str, List[str]] = ...

@@ -1,0 +1,3 @@
+from typing import Any
+
+def solve_riccati_equation() -> None: ...

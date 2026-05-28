@@ -1,0 +1,3 @@
+from typing import Any
+
+def compare_metrics(metrics_a: dict[str, float], metrics_b: dict[str, float], tier: Any) -> bool: ...
