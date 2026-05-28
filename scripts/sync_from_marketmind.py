@@ -110,6 +110,14 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+
+def _sha256_text(path: Path) -> str:
+    # Snapshot checks should detect content drift, not platform line-ending
+    # normalization from Git checkouts on Windows/Linux runners.
+    with path.open("r", encoding="utf-8", newline=None) as f:
+        text = f.read()
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
 def snapshot_payload() -> dict[str, object]:
     files = ["VERSION.md", "docs/source/index.md", "docs/source/reference/index.rst"]
     files.extend(f"docs/source/{name}" for name in COMPANION_FILES)
@@ -117,7 +125,7 @@ def snapshot_payload() -> dict[str, object]:
     return {
         "schema": 1,
         "files": {
-            name: _sha256(REPO_ROOT / name)
+            name: _sha256_text(REPO_ROOT / name)
             for name in sorted(files)
             if (REPO_ROOT / name).is_file()
         },
@@ -142,7 +150,7 @@ def check_snapshot() -> int:
             print(f"DRIFT missing snapshotted file: {rel}", file=sys.stderr)
             failures += 1
             continue
-        actual = _sha256(path)
+        actual = _sha256_text(path)
         if actual != expected:
             print(f"DRIFT snapshotted file changed: {rel}", file=sys.stderr)
             failures += 1
